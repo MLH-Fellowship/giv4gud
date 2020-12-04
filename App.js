@@ -1,9 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import firebase from 'firebase/app';
 import 'firebase/firestore'
-import Login from "./screens/LoginScreen.js"
+// import Login from "./LoginScreen.js"
+import MainNavigation from "./src/navigation/MainNavigation";
 
 var firebaseConfig = {
   apiKey: "AIzaSyAfeiT7Qp96l-iBUg_4I5ymj4yEc4Cx-k4",
@@ -20,19 +20,7 @@ firebase.initializeApp(firebaseConfig);
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Helllooo</Text>
-      <Login />
-      <StatusBar style="auto" />
-    </View>
+      <MainNavigation />
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

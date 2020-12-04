@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import firebase from 'firebase/app';
 import 'firebase/firestore'
 // import Login from "./src/screens/LoginScreen.js"
-import MainNavigation from "./src/navigation/MainNavigation";
+// import MainNavigation from "./src/navigation/MainNavigation";
 import GivrNavigation from "./src/navigation/GivrNavigation";
 
 var firebaseConfig = {
@@ -21,9 +21,7 @@ firebase.initializeApp(firebaseConfig);
 
 export default function App() {
   return (
-    <View>
-      <MainNavigation />
-    </View>
+      <GivrNavigation />
   );
 }
 

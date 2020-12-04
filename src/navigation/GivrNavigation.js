@@ -31,7 +31,7 @@ function GivrNavigation() {
         >
           <Stack.Screen
             name="Givr"
-            component={test}
+            component={GivrMain}
             options={() => ({
                 title: "I am mad"
             })}

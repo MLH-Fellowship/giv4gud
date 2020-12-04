@@ -6,7 +6,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Text } from 'react-native';
 
 import GivrMain from '../screens/givr/givrMain';
-import test from'../screens/givr/test';
 
 const Stack = createStackNavigator();
 

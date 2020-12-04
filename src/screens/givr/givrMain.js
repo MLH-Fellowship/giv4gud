@@ -5,23 +5,25 @@ import { Card } from 'react-native-elements';
 // Get data (replace w/ call to Firebase later)
 import charity from "../../../data/charity"
 
-console.log(charity[0]);
+// console.log(charity[0]);
 // Function to create Charity Cards
 
 function CharityCard(charityData){
-    console.log(charityData.data);
+    // console.log(charityData.data);
     return(
-    <Card>
+    <Card containerStyle={styles.container}>
         <Card.Title> Charity Card </Card.Title>
         <Card.Divider />
         {
         charityData.data.map((u, i) => {
             return (
-                    <View key = {i} style = {styles.container}>
+                <TouchableOpacity>
+                    <View key = {i} style = {styles.cardContainer}>
                         <Text> {u.name} </Text> 
                         <Text> Location: {u.location}</Text>
                         <Text> Needs: {u.highNeeds}</Text>
                     </View>
+                </TouchableOpacity>
             );
         })
         }
@@ -31,17 +33,20 @@ function CharityCard(charityData){
 
 export default function GivrMain(props) {
     return(
-        <CharityCard data = {charity}/>
+        <View> 
+            <CharityCard data = {charity}/>
+        </View>
     ) 
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#ebebeb',
-        padding: '20px',
-        border: "1px solid red"
-      }    
+        padding: 0,
+        backgroundColor: 'lightblue'        
+      },
+    cardContainer: {
+        margin: 10,
+        borderColor: "red",
+        borderWidth: 3
+    }
 });

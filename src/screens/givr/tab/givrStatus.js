@@ -1,10 +1,14 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
 
-export default function StatusScreen() {
+import StatusCard from '../../../components/givr/statusCard'
+
+export default function StatusScreen(props) {
+    const { route, navigation } = props;
+    const data = route.params
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Status</Text>
+          <StatusCard data = {data} />
       </View>
     );
   }

@@ -6,7 +6,7 @@ import { Input } from 'react-native-elements';
 export default function DonationForm(props) {
     const { route, navigation } = props;
     const data = route.params.data;
-    console.log("Data", data.location);
+
     return(
         <View>
             <Text> Donation Page </Text>

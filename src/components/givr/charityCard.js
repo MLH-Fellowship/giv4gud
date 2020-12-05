@@ -9,8 +9,9 @@ export default function CharityCard(charityData){
     
     // Get Navigator Object
     const navigation = useNavigation();
-    console.log("Final", charityData.navigation);
 
+    console.log("Charity Card Data for Givr Main", charityData);
+    
     return(
     <Card>
         <Card.Title> Charity Card </Card.Title>

@@ -7,7 +7,7 @@ export default function FullCharityCard(charityInfo){
     const data = charityInfo.data;
     const navigation = useNavigation();
     // implemented with Text and Button as children
-    console.log("Data", data.name, data.address);
+    // console.log("Data", data.name, data.address);
     return(
         <Card>
         <Card.Title>{data.name}</Card.Title>

@@ -24,7 +24,7 @@ function CharityCard(charityData){
         {
         charityData.data.map((u, i) => {
             return (
-                <TouchableOpacity key = {i} onPress = {() => navigation.navigate("Open Charity", {name: u.name})}>
+                <TouchableOpacity key = {i} onPress = {() => navigation.navigate("Open Charity", {data: u})}>
                     <View style = {styles.cardContainer}>
                         <Text> {u.name} </Text> 
                         <Text> Location: {u.location}</Text>

@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Text } from 'react-native';
 
 import GivrMain from '../screens/givr/givrMain';
+import TabNavigation from "./TabNavigation";
 
 const Stack = createStackNavigator();
 
@@ -31,7 +32,7 @@ function GivrNavigation() {
         >
           <Stack.Screen
             name="Givr"
-            component={GivrMain}
+            component={TabNavigation}
             options={() => ({
                 title: "Givr Main"
             })}

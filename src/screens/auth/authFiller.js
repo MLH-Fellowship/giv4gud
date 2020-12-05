@@ -14,10 +14,11 @@ export default function authFiller(props) {
 
     return(
         <View>
-            <Text> Login </Text>
+            <Text> FORM </Text>
+            <Text> Add fields to add personal info and what not </Text>
             <TouchableOpacity
                 style = {styles.buttonContainer}
-                onPress={() => navigation.navigate("Givr Main", {type: accountType})}
+                onPress={() => navigation.navigate(accountType, {type: accountType})} // Replace type w/ user ID from database
             >
                 <Text style = {styles.buttonText}> Finish Auth </Text>
             </TouchableOpacity>

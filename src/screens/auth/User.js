@@ -1,27 +1,25 @@
-// src/screens/Detail.js
-
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
 function User(props) {
-  const { route, navigation } = props;
-  const accountType = route.params.type;
-  console.log("Benchmark",navigation)
+  const { navigation } = props;
+
   return (
     <View style={styles.container}>
+      <Text> Replace with Login Auth on Home.js </Text>
       <TouchableOpacity
-        style = {styles.buttonContainer}
-        onPress={() => navigation.navigate('Signup', {type: accountType})}
+        style={styles.buttonContainer}
+        onPress={() => navigation.navigate('Givr Main', {type: account.person})}
       >
-        <Text style = {styles.buttonText}> Signup </Text>
+        <Text style = {styles.buttonText}> User </Text>
       </TouchableOpacity>
+      
       <TouchableOpacity
-        style = {styles.buttonContainer}
-        onPress={() => navigation.navigate('Login', {type: accountType})}
+        style={styles.buttonContainer}
+        onPress={() => navigation.navigate('Goodr Main', {type: account.org})}
       >
-        <Text style = {styles.buttonText}> Login </Text>
+        <Text style = {styles.buttonText}> Organization </Text>
       </TouchableOpacity>
-      <Text> {accountType} </Text>
     </View>
   );
 }
@@ -49,5 +47,10 @@ const styles = StyleSheet.create({
       color: '#fff'
   }
 });
+
+const account = {
+    person: 'User',
+    org: 'Organization'
+}
 
 export default User;

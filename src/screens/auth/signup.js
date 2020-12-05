@@ -3,15 +3,23 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
 export default function Signup(props) {
     const { route, navigation } = props;
-    const accountType = route.params.type;
+    // const accountType = route.params.type;
     return(
         <View>
-            <Text> Signup </Text>
+            <Text>FORM </Text> 
+            <Text> Email, Password, Signup w/ Google, User Type, Submit </Text>
             <TouchableOpacity
                 style = {styles.buttonContainer}
-                onPress={() => navigation.navigate('authFiller', {type: accountType})}
+                onPress={() => navigation.navigate('authFiller', {type: 'User'})}
             >
-                <Text style = {styles.buttonText}> Auth Stuff </Text>
+                <Text style = {styles.buttonText}> User </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                style = {styles.buttonContainer}
+                onPress={() => navigation.navigate('authFiller', {type: 'Organization'})}
+            >
+                <Text style = {styles.buttonText}> Organization </Text>
             </TouchableOpacity>
         </View>
     )

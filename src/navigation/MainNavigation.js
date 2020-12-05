@@ -2,17 +2,21 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Home from '../screens/start/Home';
-import User from '../screens/start/User';
-import Login from '../screens/auth/login';
+// Import Screens
+
+// Auth
+import Home from '../screens/auth/Home';
+import User from '../screens/auth/User';
 import Signup from '../screens/auth/signup';
 import authFiller from '../screens/auth/authFiller';
-import GivrMain from '../screens/givr/givrMain';
-import GoodrMain from '../screens/goodr/goodrMain';
-import TabNavigation from "./TabNavigation";
 
+// Givr
+import GivrNavigation from "./GivrNavigation";
 import CharityScreen from "../screens/givr/charityInfo"
 import DonationForm from "../screens/givr/donationForm"
+
+// Goodr
+import CharityNavigation from "./CharityNavigation";
 
 const Stack = createStackNavigator();
 
@@ -44,47 +48,39 @@ function MainNavigation() {
           <Stack.Screen
             name="User"
             component={User}
-            options={({ route }) => ({
-                title: route.params.type
-            })}
+            options={{
+                title: "Users"
+            }}
           />
           <Stack.Screen
             name="Signup"
             component={Signup}
-            options={({ route }) => ({
-                title: route.params.type
-            })}
-          />
-
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={({ route }) => ({
-                title: route.params.type
-            })}
+            options={{
+                title: "Sign Up"
+            }}
           />
 
           <Stack.Screen
             name="authFiller"
             component={authFiller}
             options={({ route }) => ({
-                title: route.params.type
+                title: route.params.type // Put user data in Route
             })}
           />
 
           <Stack.Screen
             name="Givr Main"
-            component={TabNavigation}
+            component={GivrNavigation}
             options={({ route }) => ({
-                title: route.params.type
+                title: route.params.type // Put user id in Route
             })}
           />
 
           <Stack.Screen
             name="Goodr Main"
-            component={GoodrMain}
+            component={CharityNavigation}
             options={({ route }) => ({
-                title: route.params.type
+                title: route.params.type // Put user id in Route
             })}
           />
 
@@ -92,7 +88,7 @@ function MainNavigation() {
             name="Open Charity"
             component={CharityScreen}
             options={({ route }) => ({
-                title: route.params.type
+                title: route.params.type // Pass User ID & Charity ID in Route
             })}
           />
 
@@ -100,7 +96,7 @@ function MainNavigation() {
             name="Donation Form"
             component={DonationForm}
             options={({ route }) => ({
-                title: route.params.type
+                title: route.params.type // Pass User ID & Charity ID in Route
             })}
           />
           

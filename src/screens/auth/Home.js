@@ -1,25 +1,21 @@
-// src/screens/Home.js
-
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
 function Home(props) {
   const { navigation } = props;
-
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        style={styles.buttonContainer}
-        onPress={() => navigation.navigate('User', {type: account.person})}
+        style = {styles.buttonContainer}
+        onPress={() => navigation.navigate('Signup')}
       >
-        <Text style = {styles.buttonText}> User </Text>
+        <Text style = {styles.buttonText}> Signup </Text>
       </TouchableOpacity>
-      
       <TouchableOpacity
-        style={styles.buttonContainer}
-        onPress={() => navigation.navigate('User', {type: account.org})}
+        style = {styles.buttonContainer}
+        onPress={() => navigation.navigate('User')}
       >
-        <Text style = {styles.buttonText}> Organization </Text>
+        <Text style = {styles.buttonText}> Login </Text>
       </TouchableOpacity>
     </View>
   );
@@ -48,10 +44,5 @@ const styles = StyleSheet.create({
       color: '#fff'
   }
 });
-
-const account = {
-    person: 'User',
-    org: 'Organization'
-}
 
 export default Home;

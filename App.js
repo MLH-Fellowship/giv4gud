@@ -2,11 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import firebase from 'firebase/app';
 import 'firebase/firestore'
-// import Login from "./src/screens/LoginScreen.js"
-// import MainNavigation from "./src/navigation/MainNavigation";
-import GivrNavigation from "./src/navigation/GivrNavigation";
+
+// Import Navigations
 import MainNavigation from "./src/navigation/MainNavigation";
-import TabNavigation from "./src/navigation/TabNavigation";
+import GivrNavigation from "./src/navigation/GivrNavigation";
 import TestFunction from "./test/testStuff"
 
 var firebaseConfig = {

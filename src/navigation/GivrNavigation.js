@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
 import { Text } from 'react-native';
 
 import GivrMain from '../screens/givr/givrMain';
@@ -32,7 +33,7 @@ function GivrNavigation() {
             name="Givr"
             component={GivrMain}
             options={() => ({
-                title: "I am mad"
+                title: "Givr Main"
             })}
           />
           
@@ -42,3 +43,4 @@ function GivrNavigation() {
   }
 
 export default GivrNavigation;
+

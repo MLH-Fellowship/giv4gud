@@ -17,11 +17,12 @@ function CharityCard(charityData){
         {
         charityData.data.map((u, i) => {
             return (
-                <TouchableOpacity>
-                    <View key = {i} style = {styles.cardContainer}>
+                <TouchableOpacity key = {i}>
+                    <View style = {styles.cardContainer}>
                         <Text> {u.name} </Text> 
                         <Text> Location: {u.location}</Text>
                         <Text> Needs: {u.highNeeds}</Text>
+                        <Text> Key: {i} </Text>
                     </View>
                 </TouchableOpacity>
             );
@@ -38,6 +39,7 @@ export default function GivrMain(props) {
         </View>
     ) 
 }
+
 
 const styles = StyleSheet.create({
     container: {

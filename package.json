@@ -16,6 +16,7 @@
     "expo": "~39.0.2",
     "expo-status-bar": "~1.0.2",
     "firebase": "7.9.0",
+    "formik": "^2.2.5",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz",
@@ -25,7 +26,8 @@
     "react-native-safe-area-context": "3.1.4",
     "react-native-screens": "~2.10.1",
     "react-native-web": "~0.13.7",
-    "react-navigation": "^4.4.3"
+    "react-navigation": "^4.4.3",
+    "yup": "^0.32.1"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"

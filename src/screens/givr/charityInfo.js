@@ -10,13 +10,14 @@ export default function CharityScreen(props) {
     return(
         <View>
             <Text> Render Charity {name} </Text>   
-            <CharityCard data = {data}/>    
+            <CharityCard data = {data} navigation = {navigation}/>    
         </View>
     )
 }
 
 function CharityCard(charityInfo){
     const data = charityInfo.data;
+    const navigation = charityInfo.navigation;
     // implemented with Text and Button as children
     console.log("Data", data.name, data.address);
     return(
@@ -33,11 +34,12 @@ function CharityCard(charityInfo){
 
         <Button
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-            title='VIEW NOW' />
+            title='DONATE NOW'
+            onPress={() => navigation.navigate("Donation Form", {data: data})} />
         </Card>
     )
-
 }
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,

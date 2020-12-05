@@ -12,6 +12,7 @@ import GoodrMain from '../screens/goodr/goodrMain';
 import TabNavigation from "./TabNavigation";
 
 import CharityScreen from "../screens/givr/charityInfo"
+import DonationForm from "../screens/givr/donationForm"
 
 const Stack = createStackNavigator();
 
@@ -90,6 +91,14 @@ function MainNavigation() {
           <Stack.Screen
             name="Open Charity"
             component={CharityScreen}
+            options={({ route }) => ({
+                title: route.params.type
+            })}
+          />
+
+          <Stack.Screen
+            name="Donation Form"
+            component={DonationForm}
             options={({ route }) => ({
                 title: route.params.type
             })}

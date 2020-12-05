@@ -23,14 +23,16 @@ function SettingsScreen() {
 
 const Tab = createBottomTabNavigator();
 
-export default function TabNavigation() {
+export default function TabNavigation(props) {
+    const { route, navigation } = props;
+    console.log("HI", route.params);
+    // console.log("Hellow", navigation);
   return (
-    <NavigationContainer independent="true">
-      <Tab.Navigator>
+      <Tab.Navigator initialRouteName='Home'>
         <Tab.Screen name="Home" component={GivrMain} />
         <Tab.Screen name="Donation Status" component={StatusScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
-    </NavigationContainer>
+
   );
 }

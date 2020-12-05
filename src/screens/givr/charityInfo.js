@@ -1,28 +1,13 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
-export default function authFiller(props) {
+export default function CharityScreen(props) {
     const { route, navigation } = props;
-    console.log("Route", route);
-    console.log("Navigation", navigation);
-    let accountType = route.params.type;    
-    if (accountType == "User"){
-        accountType = "Givr Main"
-    } else {
-        accountType = "Goodr Main"
-    }
 
+    const name = route.params.name;
     return(
         <View>
-            <Text> Login </Text>
-            <TouchableOpacity
-                style = {styles.buttonContainer}
-                onPress={() => navigation.navigate("Givr Main", {type: accountType})}
-            >
-                <Text style = {styles.buttonText}> Finish Auth </Text>
-            </TouchableOpacity>
-
-      <Text> {accountType} </Text>            
+            <Text> Render Charity {name} </Text>       
         </View>
     )
 }

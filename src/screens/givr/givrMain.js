@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Button } from 'react-native';
 import { Card } from 'react-native-elements';
 
+import { useNavigation } from '@react-navigation/native';
+
 // Get data (replace w/ call to Firebase later)
 import charity from "../../../data/charity"
 
@@ -10,14 +12,19 @@ import charity from "../../../data/charity"
 
 function CharityCard(charityData){
     // console.log(charityData.data);
+    // Get Navigator Object
+    // const navigation = charityData.navigation;
+    const navigation = useNavigation();
+    console.log("Final", charityData.navigation);
+
     return(
-    <Card containerStyle={styles.container}>
+    <Card>
         <Card.Title> Charity Card </Card.Title>
         <Card.Divider />
         {
         charityData.data.map((u, i) => {
             return (
-                <TouchableOpacity key = {i}>
+                <TouchableOpacity key = {i} onPress = {() => navigation.navigate("Open Charity", {name: u.name})}>
                     <View style = {styles.cardContainer}>
                         <Text> {u.name} </Text> 
                         <Text> Location: {u.location}</Text>
@@ -32,10 +39,12 @@ function CharityCard(charityData){
     )
 }
 
-export default function GivrMain(props) {
+export default function GivrMain({ navigation }) {
+    console.log("Navigate", navigation);
     return(
         <View> 
-            <CharityCard data = {charity}/>
+            <CharityCard data = {charity} />
+
         </View>
     ) 
 }

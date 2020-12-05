@@ -9,6 +9,9 @@ import Signup from '../screens/auth/signup';
 import authFiller from '../screens/auth/authFiller';
 import GivrMain from '../screens/givr/givrMain';
 import GoodrMain from '../screens/goodr/goodrMain';
+import TabNavigation from "./TabNavigation";
+
+import CharityScreen from "../screens/givr/charityInfo"
 
 const Stack = createStackNavigator();
 
@@ -70,7 +73,7 @@ function MainNavigation() {
 
           <Stack.Screen
             name="Givr Main"
-            component={GivrMain}
+            component={TabNavigation}
             options={({ route }) => ({
                 title: route.params.type
             })}
@@ -79,6 +82,14 @@ function MainNavigation() {
           <Stack.Screen
             name="Goodr Main"
             component={GoodrMain}
+            options={({ route }) => ({
+                title: route.params.type
+            })}
+          />
+
+          <Stack.Screen
+            name="Open Charity"
+            component={CharityScreen}
             options={({ route }) => ({
                 title: route.params.type
             })}

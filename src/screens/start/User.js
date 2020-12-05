@@ -6,7 +6,7 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 function User(props) {
   const { route, navigation } = props;
   const accountType = route.params.type;
-
+  console.log("Benchmark",navigation)
   return (
     <View style={styles.container}>
       <TouchableOpacity

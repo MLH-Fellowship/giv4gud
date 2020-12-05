@@ -5,6 +5,9 @@ import 'firebase/firestore'
 // import Login from "./src/screens/LoginScreen.js"
 // import MainNavigation from "./src/navigation/MainNavigation";
 import GivrNavigation from "./src/navigation/GivrNavigation";
+import MainNavigation from "./src/navigation/MainNavigation";
+import TabNavigation from "./src/navigation/TabNavigation";
+import TestFunction from "./test/testStuff"
 
 var firebaseConfig = {
   apiKey: "AIzaSyAfeiT7Qp96l-iBUg_4I5ymj4yEc4Cx-k4",
@@ -18,10 +21,9 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-
 export default function App() {
   return (
-      <GivrNavigation />
+      <MainNavigation />
   );
 }
 

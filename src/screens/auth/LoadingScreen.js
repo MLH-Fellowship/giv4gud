@@ -15,6 +15,7 @@ class LoadingScreen extends Component {
     render() {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
+                console.log("User", user);
                 this.props.navigation.navigate('Home');
             }
             else {

@@ -1,27 +1,22 @@
-// src/screens/Detail.js
-
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
-function User(props) {
-  const { route, navigation } = props;
-  const accountType = route.params.type;
-
+function Home(props) {
+  const { navigation } = props;
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style = {styles.buttonContainer}
-        onPress={() => navigation.navigate('Signup', {type: accountType})}
+        onPress={() => navigation.navigate('Signup')}
       >
         <Text style = {styles.buttonText}> Signup </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style = {styles.buttonContainer}
-        onPress={() => navigation.navigate('Login', {type: accountType})}
+        onPress={() => navigation.navigate('User')}
       >
         <Text style = {styles.buttonText}> Login </Text>
       </TouchableOpacity>
-      <Text> {accountType} </Text>
     </View>
   );
 }
@@ -50,4 +45,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default User;
+export default Home;

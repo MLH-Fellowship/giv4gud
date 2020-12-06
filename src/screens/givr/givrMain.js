@@ -1,10 +1,18 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Button } from 'react-native';
 
-export default function GivrMain(props) {
+// Import CharityChard
+import CharityCard from '../../components/givr/charityCard'
+
+// Get data (replace w/ call to Firebase later)
+import charity from "../../../data/charity"
+
+export default function GivrMain({ navigation }) {
     return(
-        <View>
-            <Text> Givr Main Page </Text>
+        <View> 
+            <CharityCard data = {charity} />
         </View>
-    )
+    ) 
 }
+
+

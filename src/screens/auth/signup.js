@@ -1,29 +1,26 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
-export default function authFiller(props) {
+export default function Signup(props) {
     const { route, navigation } = props;
-    console.log("Route", route);
-    console.log("Navigation", navigation);
-    let accountType = route.params.type;    
-    if (accountType == "User"){
-        accountType = "Givr Main"
-    } else {
-        accountType = "Goodr Main"
-    }
-
+    // const accountType = route.params.type;
     return(
         <View>
-            <Text> FORM </Text>
-            <Text> Add fields to add personal info and what not </Text>
+            <Text>FORM </Text> 
+            <Text> Email, Password, Signup w/ Google, User Type, Submit </Text>
             <TouchableOpacity
                 style = {styles.buttonContainer}
-                onPress={() => navigation.navigate(accountType, {type: accountType})} // Replace type w/ user ID from database
+                onPress={() => navigation.navigate('authFiller', {type: 'User'})}
             >
-                <Text style = {styles.buttonText}> Finish Auth </Text>
+                <Text style = {styles.buttonText}> User </Text>
             </TouchableOpacity>
 
-      <Text> {accountType} </Text>            
+            <TouchableOpacity
+                style = {styles.buttonContainer}
+                onPress={() => navigation.navigate('authFiller', {type: 'Organization'})}
+            >
+                <Text style = {styles.buttonText}> Organization </Text>
+            </TouchableOpacity>
         </View>
     )
 }

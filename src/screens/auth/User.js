@@ -1,23 +1,30 @@
-// src/screens/Home.js
-
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
-function Home(props) {
+function User(props) {
   const { navigation } = props;
 
   return (
     <View style={styles.container}>
+      <Text> Replace with Login Auth on Home.js </Text>
       <TouchableOpacity
         style={styles.buttonContainer}
+<<<<<<< HEAD:src/screens/start/Home.js
         onPress={() => navigation.navigate('Givr Main', { type: account.person })}
+=======
+        onPress={() => navigation.navigate('Givr Main', {type: account.person})}
+>>>>>>> origin/frontend:src/screens/auth/User.js
       >
         <Text style={styles.buttonText}> Individual </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.buttonContainer}
+<<<<<<< HEAD:src/screens/start/Home.js
         onPress={() => navigation.navigate('User', { type: account.org })}
+=======
+        onPress={() => navigation.navigate('Goodr Main', {type: account.org})}
+>>>>>>> origin/frontend:src/screens/auth/User.js
       >
         <Text style={styles.buttonText}> Organization </Text>
       </TouchableOpacity>
@@ -54,4 +61,4 @@ const account = {
   org: 'Organization'
 }
 
-export default Home;
+export default User;

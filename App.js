@@ -3,8 +3,12 @@ import { StyleSheet, Text, View } from 'react-native';
 import firebase from 'firebase';
 import 'firebase/firestore'
 // import Login from "./LoginScreen.js"
-import MainNavigation from "./src/navigation/MainNavigation"; // Caleb's
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'; // Cirill's
+
+// Import Navigations
+import MainNavigation from "./src/navigation/MainNavigation";
+import GivrNavigation from "./src/navigation/GivrNavigation";
+import TestFunction from "./test/testStuff"
 
 import LoginScreen from "./src/screens/auth/LoginScreen"
 import SignupScreen from "./src/screens/auth/SignupScreen"

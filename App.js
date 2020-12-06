@@ -8,7 +8,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation'; //
 // Import Navigations
 import MainNavigation from "./src/navigation/MainNavigation";
 import GivrNavigation from "./src/navigation/GivrNavigation";
-import TestFunction from "./test/testStuff"
+import TestStuff from "./test/testStuff"
 
 import LoginScreen from "./src/screens/auth/LoginScreen"
 import SignupScreen from "./src/screens/auth/SignupScreen"
@@ -17,22 +17,23 @@ import Dashboard from "./src/screens/auth/Dashboard"
 import Home from "./src/screens/auth/Home"
 
 
-const AppSwitchNavigator = createSwitchNavigator({
-  LoadingScreen: LoadingScreen,
-  SignupScreen: SignupScreen,
-  LoginScreen: LoginScreen,
-  Dashboard: Dashboard,
-  Home: Home
-})
+// const AppSwitchNavigator = createSwitchNavigator({
+//   LoadingScreen: LoadingScreen,
+//   SignupScreen: SignupScreen,
+//   LoginScreen: LoginScreen,
+//   Dashboard: Dashboard,
+//   Home: Home
+// })
 
 export default function App() {
   return (
-    <AppNavigator />,
+    //<AppNavigator /> 
     <MainNavigation />
+    // <TestStuff />
   )
 }
 
-const AppNavigator = createAppContainer(AppSwitchNavigator);
+// const AppNavigator = createAppContainer(AppSwitchNavigator);
 
 const styles = StyleSheet.create({
   container: {

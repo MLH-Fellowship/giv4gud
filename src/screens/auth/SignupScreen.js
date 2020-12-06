@@ -6,7 +6,7 @@ import 'firebase/firestore';
 import { StackNavigator } from 'react-navigation';
 import { Input } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native'
-
+import AuthContext from "../../../Context"
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -36,7 +36,7 @@ export default function SignupScreen() {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const navigation = useNavigation()
-
+    const { signIn } = React.useContext(AuthContext);
     const onRegisterPress = () => {
         if (password !== confirmPassword) {
             alert("Passwords don't match.")
@@ -57,8 +57,9 @@ export default function SignupScreen() {
                     .doc(uid)
                     .set(data)
                     .then(() => {
-                        alert('yeet')
-                        navigation.navigate('Givr Main', { type: 'User' })
+                        // alert('yeet')
+                        signIn({ username, password, email })
+                        // navigation.navigate('Givr Main', { type: 'User' })
                     })
                     .catch((error) => {
                         alert(error)

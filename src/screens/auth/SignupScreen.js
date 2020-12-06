@@ -5,6 +5,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import { StackNavigator } from 'react-navigation';
 import { Input } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native'
 
 const styles = StyleSheet.create({
     container: {
@@ -34,6 +35,7 @@ export default function SignupScreen() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const navigation = useNavigation()
 
     const onRegisterPress = () => {
         if (password !== confirmPassword) {
@@ -56,6 +58,7 @@ export default function SignupScreen() {
                     .set(data)
                     .then(() => {
                         alert('yeet')
+                        navigation.navigate('Givr Main', { type: 'User' })
                     })
                     .catch((error) => {
                         alert(error)

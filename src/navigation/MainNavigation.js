@@ -3,17 +3,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Login from '../screens/auth/LoginScreen';
-import Signup from '../screens/auth/SignupScreen';
-import authFiller from '../screens/auth/authFiller';
 import GivrMain from '../screens/givr/givrMain';
-import GoodrMain from '../screens/goodr/goodrMain';
+// import GoodrMain from '../screens/goodr/goodrMain';
 // import Loading from '../screens/auth/LoadingScreen';
 // Import Screens
 
 // Auth
 import Home from '../screens/auth/Home';
 import User from '../screens/auth/User';
-import Signup from '../screens/auth/signup';
+import SignupScreen from '../screens/auth/SignupScreen';
 import authFiller from '../screens/auth/authFiller';
 
 // Givr
@@ -60,7 +58,7 @@ function MainNavigation() {
         />
         <Stack.Screen
           name="Signup"
-          component={Signup}
+          component={SignupScreen}
           options={{
             title: "Sign Up"
           }}

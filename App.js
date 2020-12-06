@@ -13,8 +13,8 @@ import TestFunction from "./test/testStuff"
 import LoginScreen from "./src/screens/auth/LoginScreen"
 import SignupScreen from "./src/screens/auth/SignupScreen"
 import LoadingScreen from "./src/screens/auth/LoadingScreen"
-import Dashboard from "./src/screens/start/Dashboard"
-import Home from "./src/screens/start/Home"
+import Dashboard from "./src/screens/auth/Dashboard"
+import Home from "./src/screens/auth/Home"
 
 
 const AppSwitchNavigator = createSwitchNavigator({
@@ -29,7 +29,7 @@ export default function App() {
   return (
     <AppNavigator />,
     <MainNavigation />
-  );
+  )
 }
 
 const AppNavigator = createAppContainer(AppSwitchNavigator);

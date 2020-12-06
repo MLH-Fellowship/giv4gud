@@ -4,11 +4,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Home from '../screens/start/Home';
 import User from '../screens/start/User';
-import Login from '../screens/auth/login';
-import Signup from '../screens/auth/signup';
+import Login from '../screens/auth/LoginScreen';
+import Signup from '../screens/auth/SignupScreen';
 import authFiller from '../screens/auth/authFiller';
 import GivrMain from '../screens/givr/givrMain';
 import GoodrMain from '../screens/goodr/goodrMain';
+// import Loading from '../screens/auth/LoadingScreen';
 
 const Stack = createStackNavigator();
 

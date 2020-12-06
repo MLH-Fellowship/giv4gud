@@ -10,16 +10,16 @@ function Home(props) {
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.buttonContainer}
-        onPress={() => navigation.navigate('User', {type: account.person})}
+        onPress={() => navigation.navigate('User', { type: account.person })}
       >
-        <Text style = {styles.buttonText}> User </Text>
+        <Text style={styles.buttonText}> User </Text>
       </TouchableOpacity>
-      
+
       <TouchableOpacity
         style={styles.buttonContainer}
-        onPress={() => navigation.navigate('User', {type: account.org})}
+        onPress={() => navigation.navigate('User', { type: account.org })}
       >
-        <Text style = {styles.buttonText}> Organization </Text>
+        <Text style={styles.buttonText}> Organization </Text>
       </TouchableOpacity>
     </View>
   );
@@ -38,20 +38,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   buttonContainer: {
-      backgroundColor: '#222',
-      borderRadius: 5,
-      padding: 10,
-      margin: 20
+    backgroundColor: '#222',
+    borderRadius: 5,
+    padding: 10,
+    margin: 20
   },
   buttonText: {
-      fontSize: 20,
-      color: '#fff'
+    fontSize: 20,
+    color: '#fff'
   }
 });
 
 const account = {
-    person: 'User',
-    org: 'Organization'
+  person: 'User',
+  org: 'Organization'
 }
 
 export default Home;

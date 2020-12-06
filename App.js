@@ -1,32 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import firebase from 'firebase/app';
+import firebase from 'firebase';
 import 'firebase/firestore'
-import Login from "./screens/LoginScreen.js"
+// import Login from "./LoginScreen.js"
+import { createAppContainer, createSwitchNavigator } from 'react-navigation'; // Cirill's
 
-var firebaseConfig = {
-  apiKey: "AIzaSyAfeiT7Qp96l-iBUg_4I5ymj4yEc4Cx-k4",
-  authDomain: "giv4gud-dcd30.firebaseapp.com",
-  databaseURL: "https://giv4gud-dcd30.firebaseio.com",
-  projectId: "giv4gud-dcd30",
-  storageBucket: "giv4gud-dcd30.appspot.com",
-  messagingSenderId: "884472859704",
-  appId: "1:884472859704:web:e4189e20a69609b6216acd"
-};
+// Import Navigations
+import MainNavigation from "./src/navigation/MainNavigation";
+import GivrNavigation from "./src/navigation/GivrNavigation";
+import TestFunction from "./test/testStuff"
 
-firebase.initializeApp(firebaseConfig);
+import LoginScreen from "./src/screens/auth/LoginScreen"
+import SignupScreen from "./src/screens/auth/SignupScreen"
+import LoadingScreen from "./src/screens/auth/LoadingScreen"
+import Dashboard from "./src/screens/auth/Dashboard"
+import Home from "./src/screens/auth/Home"
 
+
+const AppSwitchNavigator = createSwitchNavigator({
+  LoadingScreen: LoadingScreen,
+  SignupScreen: SignupScreen,
+  LoginScreen: LoginScreen,
+  Dashboard: Dashboard,
+  Home: Home
+})
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Helllooo</Text>
-      <Login />
-      <StatusBar style="auto" />
-    </View>
-  );
+    <AppNavigator />,
+    <MainNavigation />
+  )
 }
+
+const AppNavigator = createAppContainer(AppSwitchNavigator);
 
 const styles = StyleSheet.create({
   container: {
@@ -36,3 +42,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+// export default function App() {

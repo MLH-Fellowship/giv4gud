@@ -23,8 +23,8 @@ const AppSwitchNavigator = createSwitchNavigator({
 
 export default function App() {
   return (
-    <MainNavigation />,
-    <AppNavigator />
+    <AppNavigator />,
+    <MainNavigation />
   );
 }
 

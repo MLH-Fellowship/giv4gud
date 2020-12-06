@@ -10,9 +10,9 @@ function Home(props) {
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.buttonContainer}
-        onPress={() => navigation.navigate('User', { type: account.person })}
+        onPress={() => navigation.navigate('Givr Main', { type: account.person })}
       >
-        <Text style={styles.buttonText}> User </Text>
+        <Text style={styles.buttonText}> Individual </Text>
       </TouchableOpacity>
 
       <TouchableOpacity

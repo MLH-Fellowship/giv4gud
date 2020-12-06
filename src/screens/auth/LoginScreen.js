@@ -23,7 +23,7 @@ function LoginScreen() {
             .signInWithEmailAndPassword(email, password)
             .then((response) => {
                 const uid = response.user.uid
-                const usersRef = firebase.firestore().collection('users')
+                const usersRef = firebase.firestore().collection('users') || firebase.firestore().collection('organizations')
                 usersRef
                     .doc(uid)
                     .get()

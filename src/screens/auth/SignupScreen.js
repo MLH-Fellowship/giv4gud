@@ -1,5 +1,7 @@
 import React, { Component, useEffect, useState } from "react";
 import { StyleSheet, View, Button, Text, TextInput, TouchableOpacity } from 'react-native';
+import { RadioButton } from 'react-native-paper'
+
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
@@ -8,6 +10,7 @@ import { Input } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native'
 import AuthContext from "../../../Context"
 import { db } from '../../services/firebase'
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -22,6 +25,9 @@ export default function SignupScreen() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [mailingAddress, setMailingAddress] = useState('')
+    const [userType, setuserType] = React.useState('Individual')
+    const [mainAddress, setMainAddress] = useState('')
     const navigation = useNavigation()
     const { signUp } = React.useContext(AuthContext);
     const data = {
@@ -38,7 +44,7 @@ export default function SignupScreen() {
 
     db.collection('data').doc('two').set(data);
 
-    const onRegisterPress = () => {
+    const onRegisterUserPress = () => {
         if (password !== confirmPassword) {
             alert("Passwords don't match.")
             return
@@ -52,6 +58,10 @@ export default function SignupScreen() {
                     id: uid,
                     email,
                     username,
+                    password,
+                    userType,
+                    mainAddress,
+                    mailingAddress,
                 };
                 const usersRef = firebase.firestore().collection('users')
                 usersRef
@@ -59,7 +69,7 @@ export default function SignupScreen() {
                     .set(data)
                     .then(() => {
                         // alert('yeet')
-                        signUp({ username, password, email })
+                        signUp({ username, password, email, userType })
                         // navigation.navigate('Givr Main', { type: 'User' })
                     })
                     .catch((error) => {
@@ -71,9 +81,45 @@ export default function SignupScreen() {
             });
     }
 
-    return (
-        <View style={styles.container}>
+    const onRegisterOrgPress = () => {
+        if (password !== confirmPassword) {
+            alert("Passwords don't match.")
+            return
+        }
+        firebase
+            .auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then((response) => {
+                const uid = response.user.uid
+                const data = {
+                    id: uid,
+                    email,
+                    username,
+                    password,
+                    userType,
+                    mainAddress,
+                    mailingAddress,
+                };
+                const usersRef = firebase.firestore().collection('organizations')
+                usersRef
+                    .doc(uid)
+                    .set(data)
+                    .then(() => {
+                        // alert('yeet')
+                        signUp({ username, password, email, userType })
+                        // navigation.navigate('Givr Main', { type: 'User' })
+                    })
+                    .catch((error) => {
+                        alert(error)
+                    });
+            })
+            .catch((error) => {
+                alert(error)
+            });
+    }
 
+    const individualForm =
+        <>
             <TextInput
 
                 placeholder='Username'
@@ -83,6 +129,7 @@ export default function SignupScreen() {
                 underlineColorAndroid="transparent"
                 autoCapitalize="none"
             />
+
             <TextInput
 
                 placeholder='E-mail'
@@ -116,8 +163,93 @@ export default function SignupScreen() {
 
                 onPress={() => onRegisterPress()}>
                 <Text >Create account</Text>
-            </TouchableOpacity>
 
+            </TouchableOpacity>
+        </>
+
+    const orgForm =
+        <>
+            <TextInput
+
+                placeholder='Orgnanization Name'
+                placeholderTextColor="#aaaaaa"
+                onChangeText={(text) => setUsername(text)}
+                value={username}
+                underlineColorAndroid="transparent"
+                autoCapitalize="none"
+            />
+
+            <TextInput
+
+                placeholder='Organization E-mail'
+                placeholderTextColor="#aaaaaa"
+                onChangeText={(text) => setEmail(text)}
+                value={email}
+                underlineColorAndroid="transparent"
+                autoCapitalize="none"
+            />
+            <TextInput
+
+                placeholderTextColor="#aaaaaa"
+                secureTextEntry
+                placeholder='Password'
+                onChangeText={(text) => setPassword(text)}
+                value={password}
+                underlineColorAndroid="transparent"
+                autoCapitalize="none"
+            />
+            <TextInput
+
+                placeholderTextColor="#aaaaaa"
+                secureTextEntry
+                placeholder='Confirm Password'
+                onChangeText={(text) => setConfirmPassword(text)}
+                value={confirmPassword}
+                underlineColorAndroid="transparent"
+                autoCapitalize="none"
+            />
+
+            <TextInput
+
+                placeholderTextColor="#aaaaaa"
+                placeholder='Main Address'
+                onChangeText={(text) => setMainAddress(text)}
+                value={mainAddress}
+                underlineColorAndroid="transparent"
+                autoCapitalize="none"
+            />
+
+            <TextInput
+
+                placeholderTextColor="#aaaaaa"
+                placeholder='Mailing Address'
+                onChangeText={(text) => setMailingAddress(text)}
+                value={mailingAddress}
+                underlineColorAndroid="transparent"
+                autoCapitalize="none"
+            />
+
+            <TouchableOpacity
+
+                onPress={() => onRegisterOrgPress()}>
+                <Text >Create account</Text>
+
+            </TouchableOpacity>
+        </>
+    return (
+        <View style={styles.container}>
+
+            <RadioButton.Group onValueChange={newValue => setuserType(newValue)} value={userType}>
+                <View>
+                    <Text>Individual</Text>
+                    <RadioButton value="Individual" />
+                </View>
+                <View>
+                    <Text>Organization</Text>
+                    <RadioButton value="Organization" />
+                </View>
+            </RadioButton.Group>
+            {userType == "Individual" ? individualForm : orgForm}
         </View>
     )
 }

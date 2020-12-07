@@ -6,11 +6,13 @@ import DonationForm from "./donationForm"
 
 export default function CharityScreen(props) {
     const { route, navigation } = props;
-    const data = route.params.data;
+    const id = route.params.id; // User ID (probably won't need to use in this file)
+    const charityID = route.params.charityID;
+    // console.log("Intermediate", route, id, charityID)
     return(
         <View>
-            <FullCharityCard data = {data}/>
-            <DonationForm data = {data}/>
+            <FullCharityCard id = {id} charityID = {charityID}/>
+            <DonationForm id = {id} charityID = {charityID}/>
         </View>
     )
 }

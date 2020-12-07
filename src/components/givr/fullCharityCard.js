@@ -3,11 +3,15 @@ import { StyleSheet, View, Text, TouchableOpacity, Button, Icon } from 'react-na
 import { Card } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 
-export default function FullCharityCard(charityInfo){
-    const data = charityInfo.data;
+// Get data (replace w/ call to Firebase later)
+import charity from "../../../data/charity" // Dummy data of charities
+
+export default function FullCharityCard(props){
     const navigation = useNavigation();
-    // implemented with Text and Button as children
-    // console.log("Data", data.name, data.address);
+    const id = props.id; // User ID (probably won't need to use in this file)
+    const charityID = props.charityID;
+    const data = charity[charityID];
+    console.log("Check", charity, data, charityID);
     return(
         <Card>
             <Card.Title>{data.name}</Card.Title>

@@ -17,6 +17,16 @@ if (!firebase.apps.length) {
 
 const db = firebase.firestore();
 
+const addDonation = (data) => {
+    db.collection("users").doc().update({
+        "items": { data }
+    })
+        .then(function () {
+            console.log("Document successfully updated!");
+        })
+}
+
 export {
-    db
+    db,
+    addDonation,
 }

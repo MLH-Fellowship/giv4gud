@@ -4,6 +4,7 @@ import firebase from 'firebase'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigator } from 'react-navigation';
 import { Input } from 'react-native-elements';
+import AuthContext from "../../../Context";
 
 const styles = StyleSheet.create({
     container: {
@@ -17,6 +18,7 @@ const styles = StyleSheet.create({
 function LoginScreen() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const { signIn } = React.useContext(AuthContext)
 
     const navigation = useNavigation()
 
@@ -37,7 +39,7 @@ function LoginScreen() {
                         }
                         alert('yeet');
                         // Call signIn function
-                        
+                        signIn()
                     })
                     .catch(error => {
                         alert(error)

@@ -117,6 +117,10 @@ export default function SignupScreen() {
                 <Text >Create account</Text>
             </TouchableOpacity>
 
+            <Text
+                onPress={() => navigation.navigate('Login')}
+            > Returning user? Login.
+            </Text>
         </View>
     )
 }

@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 // // Auth
 import SignupScreen from '../screens/auth/SignupScreen';
+import LoginScreen from '../screens/auth/LoginScreen';
 
 // Givr
 import GivrNavigation from "./GivrNavigation";
@@ -34,51 +35,51 @@ const Stack = createStackNavigator();
 function MainNavigation() {
   // Auth Code
   const [state, dispatch] = React.useReducer
-  (
-    (prevState, action) => {
-      switch (action.type) {
-        case 'RESTORE_TOKEN':
-          return {
-            ...prevState,
-            userToken: action.token, // action.token,
-            isLoading: false,
-            userType: null, // null,
-            userID: null,
-          };
-        case 'SIGN_IN':
-          return {
-            ...prevState,
-            isSignout: false,
-            userToken: action.token,
-            userType: action.user,
-            userID: action.id,
-          };
-        case 'SIGN_UP':
-          return {
-            ...prevState,
-            isSignout: false,
-            userToken: action.token,
-            userType: action.user,
-            userID: action.id,
-          };
-        case 'SIGN_OUT':
-          return {
-            ...prevState,
-            isSignout: true,
-            userToken: null,
-            userType: null,
-            userID: null,
-          };
+    (
+      (prevState, action) => {
+        switch (action.type) {
+          case 'RESTORE_TOKEN':
+            return {
+              ...prevState,
+              userToken: action.token, // action.token,
+              isLoading: false,
+              userType: null, // null,
+              userID: null,
+            };
+          case 'SIGN_IN':
+            return {
+              ...prevState,
+              isSignout: false,
+              userToken: action.token,
+              userType: action.user,
+              userID: action.id,
+            };
+          case 'SIGN_UP':
+            return {
+              ...prevState,
+              isSignout: false,
+              userToken: action.token,
+              userType: action.user,
+              userID: action.id,
+            };
+          case 'SIGN_OUT':
+            return {
+              ...prevState,
+              isSignout: true,
+              userToken: null,
+              userType: null,
+              userID: null,
+            };
+        }
+      },
+      {
+        isLoading: true,
+        isSignout: false,
+        userToken: null,
+        userType: null,
+        userID: null,
       }
-    },
-    {
-      isLoading: true, 
-      isSignout: false,
-      userToken: null, 
-      userType: null, 
-      userID: null,
-    }
-  );
+    );
 
   React.useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
@@ -104,9 +105,9 @@ function MainNavigation() {
   const authContext = React.useMemo(
     () => ({
       signIn: async data => {
-        
+
         console.log("Data", data);
-        
+
         /* Check if user exists using firebase 
            Return user key / id if exists
            Else dispatch restoreToken */
@@ -116,11 +117,11 @@ function MainNavigation() {
       signOut: () => dispatch({ type: 'SIGN_OUT' }),
       signUp: async data => {
 
-           /* Add user to database
-           Return user key / id 
-           For SIGN_IN Dispatch, move screen to additional form screen */
+        /* Add user to database
+        Return user key / id 
+        For SIGN_IN Dispatch, move screen to additional form screen */
 
-           dispatch({ type: 'SIGN_UP', token: 'dummy-auth-token', user: 'Other' });
+        dispatch({ type: 'SIGN_UP', token: 'dummy-auth-token', user: 'Other' });
       },
     }),
     []
@@ -129,30 +130,42 @@ function MainNavigation() {
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         <Stack.Navigator>
-          
+
           {state.isLoading ? (
             // We haven't finished checking for the token yet
             <Stack.Screen name="Splash" component={SplashScreen} />
           ) : state.userToken == null ? (
             // No token found, user isn't signed in
-            <Stack.Screen
-              name="SignIn"
-              component={SignupScreen}
-              options={{
-                title: 'Sign in',
-            // When logging out, a pop animation feels intuitive
-                animationTypeForReplace: state.isSignout ? 'pop' : 'push',
-              }}
-            />
-            // Add Login Screen
+            <>
+              <Stack.Screen
+                name="SignIn"
+                component={SignupScreen}
+                options={{
+                  title: 'Sign in',
+                  // When logging out, a pop animation feels intuitive
+                  animationTypeForReplace: state.isSignout ? 'pop' : 'push',
+                }}
+              />
+
+              <Stack.Screen
+                name="Login"
+                component={LoginScreen}
+                options={{
+                  title: 'Login',
+                  // When logging out, a pop animation feels intuitive
+                  animationTypeForReplace: state.isSignout ? 'pop' : 'push',
+                }}
+              />
+
+            </>
 
           ) : state.userType == 'User' && state.userToken != null ? (
             // User is signed in
             <>
 
               <Stack.Screen
-              name="Givr Main"
-              component={GivrNavigation}
+                name="Givr Main"
+                component={GivrNavigation}
               />
 
               <Stack.Screen
@@ -170,17 +183,17 @@ function MainNavigation() {
                   title: route.params.type // Pass User ID & Charity ID in Route
                 })}
               />
-              
+
             </>
           ) : (
-            <>
-              <Stack.Screen
-                name="Goodr Main"
-                component={CharityNavigation}
-              />    
-            </>
+                  <>
+                    <Stack.Screen
+                      name="Goodr Main"
+                      component={CharityNavigation}
+                    />
+                  </>
 
-          )}
+                )}
         </Stack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>

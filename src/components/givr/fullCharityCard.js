@@ -10,20 +10,14 @@ export default function FullCharityCard(charityInfo){
     // console.log("Data", data.name, data.address);
     return(
         <Card>
-        <Card.Title>{data.name}</Card.Title>
-        <Card.Divider/>
-        <Card.Image source={require('../../../pic.jpg')} />
-        <Text style={{marginBottom: 10}}>
-            Address: {data.address}
-        </Text>
-        <Text> Location: {data.location} </Text>
-        <Text> Important Needs: {data.highNeeds} </Text>
-        <Text> Full Needs: {data.fullNeeds} </Text>
-
-        <Button
-            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-            title='DONATE NOW'
-            onPress={() => navigation.navigate("Donation Form", {data: data})} />
+            <Card.Title>{data.name}</Card.Title>
+            <Card.Divider/>
+            <Text style={{marginBottom: 10}}>
+                Address: {data.address}
+            </Text>
+            <Text> Location: {data.location} </Text>
+            <Text> Important Needs: {data.highNeeds} </Text>
+            <Text> Full Needs: {data.fullNeeds} </Text>
         </Card>
     )
 }

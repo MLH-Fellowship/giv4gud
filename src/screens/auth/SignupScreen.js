@@ -52,7 +52,7 @@ export default function SignupScreen() {
                     email,
                     username,
                 };
-                const usersRef = firebase.firestore().collection('users')
+                const usersRef = firebase.firestore().collection('users') // Change collection name based on user
                 usersRef
                     .doc(uid)
                     .set(data)

@@ -61,7 +61,7 @@ export default function SignupScreen() {
                     password,
                     userType,
                 };
-                const usersRef = firebase.firestore().collection('users')
+                const usersRef = firebase.firestore().collection('users') // Change collection name based on user
                 usersRef
                     .doc(uid)
                     .set(data)
@@ -248,6 +248,10 @@ export default function SignupScreen() {
                 </View>
             </RadioButton.Group>
             {userType == "Individual" ? individualForm : orgForm}
+            <Text
+                onPress={() => navigation.navigate('Login')}
+            > Returning user? Login.
+            </Text>
         </View>
     )
 }

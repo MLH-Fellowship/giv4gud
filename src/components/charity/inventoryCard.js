@@ -11,7 +11,7 @@ export default function InventoryCard(charityData) {
     console.log("Inventory Card Props", charityData); // Replace w/ firebase database call later (maybe need to convert to array??)
     return(
         <Card>
-            <Card.Title> Donation List </Card.Title>
+            <Card.Title> Donation Needs </Card.Title>
             <Card.Divider />
             {
             data.map((u, i) => {

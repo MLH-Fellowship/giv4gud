@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
 import { StyleSheet, View, Button, Text, TextInput, TouchableOpacity } from 'react-native';
 import firebase from 'firebase'
+import { useNavigation } from '@react-navigation/native'
 import { StackNavigator } from 'react-navigation';
 import { Input } from 'react-native-elements';
 
@@ -17,6 +18,8 @@ function LoginScreen() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    const navigation = useNavigation()
+
     const onLoginPress = () => {
         firebase
             .auth()
@@ -32,7 +35,9 @@ function LoginScreen() {
                             alert("User does not exist anymore.")
                             return;
                         }
-
+                        alert('yeet');
+                        // Call signIn function
+                        
                     })
                     .catch(error => {
                         alert(error)
@@ -44,7 +49,7 @@ function LoginScreen() {
     }
 
     return (
-        <View>
+        <View style={styles.container}>
 
             <TextInput
                 placeholder='E-mail'
@@ -67,6 +72,12 @@ function LoginScreen() {
                 onPress={() => onLoginPress()}>
                 <Text>Log in</Text>
             </TouchableOpacity>
+
+            <Text
+                onPress={() => navigation.navigate('SignIn')}
+            > Don't have an account? Sign up.
+
+            </Text>
 
         </View>
     )

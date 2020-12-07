@@ -30,25 +30,35 @@ function LoginScreen() {
                 const uid = response.user.uid
                 const usersRef = firebase.firestore().collection('users')
                 const orgsRef = firebase.firestore().collection('organizations')
-                usersRef
-                orgsRef
-                    .doc(uid)
-                    .get()
-                    .then(firestoreDocument => {
-                        if (!firestoreDocument.exists) {
-                            alert("User does not exist anymore.")
-                            return;
-                        }
-                        alert('yeet');
-                        // Call signIn function
-                        signIn()
-                    })
-                    .catch(error => {
-                        alert(error)
-                    });
-            })
-            .catch(error => {
-                alert(error)
+                if (usersRef.doc(uid)) {
+                    console.log(usersRef.doc(uid))
+                    usersRef.doc(uid)
+                        .get()
+                        .then(firestoreDocument => {
+                            if (!firestoreDocument.exists) {
+                                orgsRef.doc(uid)
+                                    .get()
+                                    .then(firestoreDocument => {
+                                        if (!firestoreDocument.exists) {
+                                            alert("User does not exist anymore.")
+                                            return;
+                                        }
+                                        alert('organization');
+                                        // Call signIn function
+                                        signIn()
+                                    })
+                                    .catch(error => {
+                                        alert(error)
+                                    });
+                            }
+                            alert('user');
+                            // Call signIn function
+                            signIn()
+                        })
+                        .catch(error => {
+                            alert(error)
+                        });
+                }
             })
     }
 

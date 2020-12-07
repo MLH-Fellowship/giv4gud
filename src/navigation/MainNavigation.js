@@ -44,18 +44,21 @@ function MainNavigation() {
             ...prevState,
             userToken: action.token,
             isLoading: false,
+            userType: null,
           };
         case 'SIGN_IN':
           return {
             ...prevState,
             isSignout: false,
             userToken: action.token,
+            userType: action.user,
           };
         case 'SIGN_OUT':
           return {
             ...prevState,
             isSignout: true,
             userToken: null,
+            userType: null,
           };
       }
     },
@@ -63,8 +66,10 @@ function MainNavigation() {
       isLoading: true,
       isSignout: false,
       userToken: null,
+      userType: null,
     }
   );
+
   React.useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
@@ -94,7 +99,10 @@ function MainNavigation() {
         // After getting token, we need to persist the token using `AsyncStorage`
         // In the example, we'll use a dummy token
         
-        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+        console.log("Data", data);
+        // Define user here based on firebase data
+
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', user: 'Other' });
       },
       signOut: () => dispatch({ type: 'SIGN_OUT' }),
       signUp: async data => {
@@ -126,68 +134,39 @@ function MainNavigation() {
                 animationTypeForReplace: state.isSignout ? 'pop' : 'push',
               }}
             />
-          ) : (
+          ) : state.userType == 'User' ? (
             // User is signed in
             <>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ title: 'Giv4Gud' }}
-        />
+              
+              <Stack.Screen
+              name="Givr Main"
+              component={GivrNavigation}
+              />
 
-        <Stack.Screen
-          name="User"
-          component={User}
-          options={{
-            title: "Users"
-          }}
-        />
-        <Stack.Screen
-          name="Signup"
-          component={SignupScreen}
-          options={{
-            title: "Sign Up"
-          }}
-        />
+              <Stack.Screen
+                name="Open Charity"
+                component={CharityScreen}
+                options={({ route }) => ({
+                  title: route.params.type // Pass User ID & Charity ID in Route
+                })}
+              />
 
-        <Stack.Screen
-          name="authFiller"
-          component={authFiller}
-          options={({ route }) => ({
-            title: route.params.type // Put user data in Route
-          })}
-        />
-            <Stack.Screen
-            name="Givr Main"
-            component={GivrNavigation}
-            options={({ route }) => ({
-              title: route.params.type // Put user id in Route
-            })}
-          />
-  
-          <Stack.Screen
-            name="Goodr Main"
-            component={CharityNavigation}
-            options={({ route }) => ({
-              title: route.params.type // Put user id in Route
-            })}
-          />
-  
-          <Stack.Screen
-            name="Open Charity"
-            component={CharityScreen}
-            options={({ route }) => ({
-              title: route.params.type // Pass User ID & Charity ID in Route
-            })}
-          />
-  
-          <Stack.Screen
-            name="Donation Form"
-            component={DonationForm}
-            options={({ route }) => ({
-              title: route.params.type // Pass User ID & Charity ID in Route
-            })}
-          />
+              <Stack.Screen
+                name="Donation Form"
+                component={DonationForm}
+                options={({ route }) => ({
+                  title: route.params.type // Pass User ID & Charity ID in Route
+                })}
+              />
+              
+            </>
+          ) : (
+            <>
+              <Stack.Screen
+                name="Goodr Main"
+                component={CharityNavigation}
+              />
+    
           </>
           )}
         </Stack.Navigator>

@@ -60,8 +60,6 @@ export default function SignupScreen() {
                     username,
                     password,
                     userType,
-                    mainAddress,
-                    mailingAddress,
                 };
                 const usersRef = firebase.firestore().collection('users')
                 usersRef
@@ -106,7 +104,7 @@ export default function SignupScreen() {
                     .set(data)
                     .then(() => {
                         // alert('yeet')
-                        signUp({ username, password, email, userType })
+                        signUp({ username, password, email, userType, mainAddress, mailingAddress })
                         // navigation.navigate('Givr Main', { type: 'User' })
                     })
                     .catch((error) => {
@@ -161,7 +159,7 @@ export default function SignupScreen() {
             />
             <TouchableOpacity
 
-                onPress={() => onRegisterPress()}>
+                onPress={() => onRegisterUserPress()}>
                 <Text >Create account</Text>
 
             </TouchableOpacity>

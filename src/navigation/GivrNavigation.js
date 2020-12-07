@@ -20,7 +20,7 @@ export default function GivrNavigation(props) {
       <Tab.Navigator initialRouteName='Home'>
         <Tab.Screen name="Home" component={GivrMain} />
         <Tab.Screen name="Donation Status" component={StatusScreen} initialParams={{charity}}/>
-        <Tab.Screen name="Settings" component={SettingsScreen} />
+        {/* <Tab.Screen name="Settings" component={SettingsScreen} /> */}
       </Tab.Navigator>
   );
 }

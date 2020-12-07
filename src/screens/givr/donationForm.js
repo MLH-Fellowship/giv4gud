@@ -1,131 +1,92 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 
-import TextInput from '../../components/givr/forms/TextInput';
-import Button from '../../components/givr/forms/Button';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-
-// Outside function
-// import OutsideFunction from '../services/Function'
-
-// Data
-const data = 
+// Data *delete once integrated w/ database*
+const sampleData = 
 [
   {
-    "email": "467cnl09",
-    "password": "Qwerty917"
+    "itemName": "Shirt",
+    "category": "Clothing",
+    "priority": "High"
   },
   {
-    "email": "123asl14",
-    "password": "BBB"
+    "itemName": "Pants",
+    "category": "Clothing",
+    "priority": "Medium"
+  },
+  {
+    "itemName": "Food",
+    "category": "Canned Tomatos",
+    "priority": "Low"
   }
 ]
 
 // Donation Cards
-function Card(){
+function DonationCardGallery(props){
   return(
     <View>
-      {data.map((x, i) => {
+      <Text> HELLLLO </Text>
+      {props.data.map((x, i) => {
         return(
-        <View key={i}> 
-          <Text> {x.email} </Text>
-          <Text>{x.password} </Text>
-        </View>
+          <DonationCard data = {x} id = {i} store = {props.store} key = {i}/>
         )
       })}
     </View>
   );
 }
 
-const LoginSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email').required('Required'),
-    password: Yup.string()
-      .min(2, 'Too Short!')
-      .max(10, 'Too Long!')
-      .required('Required')
-  });
+function DonationCard(props) {
+    const data = props.data;
+    const name = data.itemName;
+    const key = props.id
+    const [count, setCount] = useState(0);
 
-export default function DonationForm() {
+    return(
+        <TouchableOpacity key = {key} onPress={() => {
+            setCount(count + 1);
+            props.store[name] += 1;
+          }
+        }> 
+          <Text> Item: {data.itemName} </Text>
+          <Text> Priority: {data.priority} </Text>
+          <Text> Quantity: {count}</Text>
+        </TouchableOpacity>
+        )
+}
 
-    // useState test
-    const [text, addText ] = useState("Hi");
+// Reach: add a way to filter items
+// Reach: add description feature
+
+export default function DonationForm(props) {
     
-    const password = useRef(null);
-    const {
-        handleChange,
-        handleSubmit,
-        handleBlur,
-        values,
-        errors,
-        touched
-      } = useFormik({
-        validationSchema: LoginSchema,
-        initialValues: { email: '', password: '' },
-        onSubmit: values =>
-        {
-          // Database Call
-          // OutsideFunction("Call to Database"); 
-
-          // useState update
-          data.push(
-            {
-                "email": values.email,
-                "password": values.password
-            })
-          addText(data) 
-        }
-      });
+    console.log(props.data);
+    // Repalce w/ database call
+    const data = 
+      {
+      "Shirt": 0,
+      "Pants": 0,
+      "Food": 0
+      }
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}
-    >
-      <Card />
-      <Text style={{ color: '#223e4b', fontSize: 20, marginBottom: 16 }}>
-        Login
-      </Text>
-      <View style={{ paddingHorizontal: 32, marginBottom: 16, width: '100%' }}>
-        <TextInput
-          icon='mail'
-          placeholder='Enter your email'
-          autoCapitalize='none'
-          autoCompleteType='email'
-          keyboardType='email-address'
-          keyboardAppearance='dark'
-          returnKeyType='next'
-          returnKeyLabel='next'
-          onChangeText={handleChange('email')}
-          onBlur={handleBlur('email')}
-          error={errors.email}
-          touched={touched.email}
-          onSubmitEditing={() => password.current?.focus()}
-        />
-      </View>
-      <View style={{ paddingHorizontal: 32, marginBottom: 16, width: '100%' }}>
-        <TextInput
-          icon='key'
-          placeholder='Enter your password'
-          secureTextEntry
-          autoCompleteType='password'
-          autoCapitalize='none'
-          keyboardAppearance='dark'
-          returnKeyType='go'
-          returnKeyLabel='go'
-          onChangeText={handleChange('password')}
-          onBlur={handleBlur('password')}
-          error={errors.password}
-          touched={touched.password}
-          ref={password}
-          onSubmitEditing={() => handleSubmit()}
-        />
-      </View>
-      <Button label='Login' onPress={handleSubmit} />
+    <View>
+      <DonationCardGallery data={sampleData} store = {data} />
+      <TouchableOpacity onPress={() => console.log(data)} >
+          <Text> Push this to return </Text>
+      </TouchableOpacity>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  cardGallery: {
+    flex: 1,
+    backgroundColor: 'lightblue',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 1000,
+  },
+  card: {
+    height: 200
+  }
+});

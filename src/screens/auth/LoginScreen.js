@@ -35,7 +35,9 @@ function LoginScreen() {
                             alert("User does not exist anymore.")
                             return;
                         }
-
+                        alert('yeet');
+                        // Call signIn function
+                        
                     })
                     .catch(error => {
                         alert(error)

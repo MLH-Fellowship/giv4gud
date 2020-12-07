@@ -2,10 +2,8 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-
 // // Auth
 import SignupScreen from '../screens/auth/SignupScreen';
-
 
 // Givr
 import GivrNavigation from "./GivrNavigation";
@@ -18,9 +16,11 @@ import CharityNavigation from "./CharityNavigation";
 // Import Auth
 import AuthContext from "../../Context"
 import { Button, Text, TextInput, View } from 'react-native';
+
+// Fix AsyncStorage if time permits
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// Test Functions (replace later)
+// Loading Screen
 function SplashScreen() {
   return (
     <View>
@@ -40,12 +40,20 @@ function MainNavigation() {
         case 'RESTORE_TOKEN':
           return {
             ...prevState,
-            userToken: action.token,
+            userToken: action.token, // action.token,
             isLoading: false,
-            userType: null,
+            userType: null, // null,
             userID: null,
           };
         case 'SIGN_IN':
+          return {
+            ...prevState,
+            isSignout: false,
+            userToken: action.token,
+            userType: action.user,
+            userID: action.id,
+          };
+        case 'SIGN_UP':
           return {
             ...prevState,
             isSignout: false,
@@ -64,10 +72,10 @@ function MainNavigation() {
       }
     },
     {
-      isLoading: true,
+      isLoading: true, 
       isSignout: false,
-      userToken: null,
-      userType: null,
+      userToken: null, 
+      userType: null, 
       userID: null,
     }
   );
@@ -102,7 +110,6 @@ function MainNavigation() {
         /* Check if user exists using firebase 
            Return user key / id if exists
            Else dispatch restoreToken */
-        
 
         dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', user: 'Other' });
       },
@@ -113,7 +120,7 @@ function MainNavigation() {
            Return user key / id 
            For SIGN_IN Dispatch, move screen to additional form screen */
 
-        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+           dispatch({ type: 'SIGN_UP', token: 'dummy-auth-token', user: 'Other' });
       },
     }),
     []
@@ -122,6 +129,7 @@ function MainNavigation() {
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         <Stack.Navigator>
+          
           {state.isLoading ? (
             // We haven't finished checking for the token yet
             <Stack.Screen name="Splash" component={SplashScreen} />
@@ -136,7 +144,9 @@ function MainNavigation() {
                 animationTypeForReplace: state.isSignout ? 'pop' : 'push',
               }}
             />
-          ) : state.userType == 'User' ? (
+            // Add Login Screen
+
+          ) : state.userType == 'User' && state.userToken != null ? (
             // User is signed in
             <>
 
@@ -167,9 +177,9 @@ function MainNavigation() {
               <Stack.Screen
                 name="Goodr Main"
                 component={CharityNavigation}
-              />
-    
-          </>
+              />    
+            </>
+
           )}
         </Stack.Navigator>
       </NavigationContainer>

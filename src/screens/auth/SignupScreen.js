@@ -36,7 +36,7 @@ export default function SignupScreen() {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const navigation = useNavigation()
-    const { signIn } = React.useContext(AuthContext);
+    const { signUp } = React.useContext(AuthContext);
     const onRegisterPress = () => {
         if (password !== confirmPassword) {
             alert("Passwords don't match.")
@@ -58,7 +58,7 @@ export default function SignupScreen() {
                     .set(data)
                     .then(() => {
                         // alert('yeet')
-                        signIn({ username, password, email })
+                        signUp({ username, password, email })
                         // navigation.navigate('Givr Main', { type: 'User' })
                     })
                     .catch((error) => {

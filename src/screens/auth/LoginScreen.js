@@ -28,8 +28,10 @@ function LoginScreen() {
             .signInWithEmailAndPassword(email, password)
             .then((response) => {
                 const uid = response.user.uid
-                const usersRef = firebase.firestore().collection('users') || firebase.firestore().collection('organizations')
+                const usersRef = firebase.firestore().collection('users')
+                const orgsRef = firebase.firestore().collection('organizations')
                 usersRef
+                orgsRef
                     .doc(uid)
                     .get()
                     .then(firestoreDocument => {

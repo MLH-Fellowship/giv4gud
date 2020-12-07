@@ -14,15 +14,15 @@ import charity from "../../data/givr"
 const Tab = createBottomTabNavigator();
 
 export default function CharityNavigation(props) {
-    const { route, navigation } = props;
-    // console.log("Charity Route", route.params);
+  const { route, navigation } = props;
+  // console.log("Charity Route", route.params);
 
-    // Update initial params to navigator later
+  // Update initial params to navigator later
   return (
-      <Tab.Navigator initialRouteName='Home'>
-        <Tab.Screen name="Home" component={CharityMain} initialParams = {inventoryData}/> 
-        <Tab.Screen name="Donation Status" component={InventoryScreen} initialParams = {{name: "Insert Organization Name Here"}}/>
-        {/* <Tab.Screen name="Settings" component={SettingsScreen} /> */}
-      </Tab.Navigator>
+    <Tab.Navigator initialRouteName='Home'>
+      <Tab.Screen name="Home" component={CharityMain} initialParams={inventoryData} />
+      <Tab.Screen name="Donation Status" component={InventoryScreen} initialParams={{ name: "Insert Organization Name Here" }} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
+    </Tab.Navigator>
   );
 }

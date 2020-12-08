@@ -18,6 +18,7 @@ if (!firebase.apps.length) {
 
 const db = firebase.firestore();
 
+
 const addDonation = (data) => {
     db.collection("users").doc("rZwFQ4GlYha2W2PE9khvJrIJF223").update({
         "items": { data }

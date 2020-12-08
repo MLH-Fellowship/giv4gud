@@ -2,7 +2,6 @@ import React, { Component, useState } from "react";
 import { StyleSheet, View, Button, Text, TextInput, TouchableOpacity } from 'react-native';
 import firebase from 'firebase'
 import { useNavigation } from '@react-navigation/native'
-import { StackNavigator } from 'react-navigation';
 import { Input } from 'react-native-elements';
 import AuthContext from "../../../Context";
 
@@ -29,36 +28,52 @@ function LoginScreen() {
             .then((response) => {
                 const uid = response.user.uid
                 const usersRef = firebase.firestore().collection('users')
+                usersRef
+                    .doc(uid)
+                    .get()
+                    .then(firestoreDocument => {
+                        if (!firestoreDocument.exists) {
+                            onLoginOrgPress()
+                            return;
+                        }
+                        alert('user');
+                        // Call signIn function
+                        signIn();
+                    })
+                    .catch(error => {
+                        alert(error)
+                    });
+            })
+            .catch(error => {
+                alert(error)
+            })
+    }
+
+    const onLoginOrgPress = () => {
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then((response) => {
+                const uid = response.user.uid
                 const orgsRef = firebase.firestore().collection('organizations')
-                if (usersRef.doc(uid)) {
-                    console.log(usersRef.doc(uid))
-                    usersRef.doc(uid)
-                        .get()
-                        .then(firestoreDocument => {
-                            if (!firestoreDocument.exists) {
-                                orgsRef.doc(uid)
-                                    .get()
-                                    .then(firestoreDocument => {
-                                        if (!firestoreDocument.exists) {
-                                            alert("User does not exist anymore.")
-                                            return;
-                                        }
-                                        alert('organization');
-                                        // Call signIn function
-                                        signIn()
-                                    })
-                                    .catch(error => {
-                                        alert(error)
-                                    });
-                            }
-                            alert('user');
-                            // Call signIn function
-                            signIn()
-                        })
-                        .catch(error => {
-                            alert(error)
-                        });
-                }
+                orgsRef
+                    .doc(uid)
+                    .get()
+                    .then(firestoreDocument => {
+                        if (!firestoreDocument.exists) {
+                            alert("Email does not exist anymore.")
+                            return;
+                        }
+                        alert('organization');
+                        // Call signIn function
+                        signIn();
+                    })
+                    .catch(error => {
+                        alert(error)
+                    });
+            })
+            .catch(error => {
+                alert(error)
             })
     }
 

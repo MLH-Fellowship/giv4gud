@@ -7,8 +7,11 @@ import data from '../../../data/inventory'
 
 /* Add hook to update cards whenever server sends an update */
 
-export default function InventoryCard(charityData) {
-    console.log("Inventory Card Props", charityData); // Replace w/ firebase database call later (maybe need to convert to array??)
+export default function InventoryCard(props) {
+    const id = props.id;
+    console.log("Inventory Card IDs", id); 
+    
+    // Replace data in mapping function w/ firebase data  (maybe need to convert to array??)
     return(
         <Card>
             <Card.Title> Donation Needs </Card.Title>

@@ -26,7 +26,7 @@ export default function SignupScreen() {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [mailingAddress, setMailingAddress] = useState('')
-    const [userType, setuserType] = React.useState('Individual')
+    const [userType, setuserType] = React.useState('User')
     const [mainAddress, setMainAddress] = useState('')
     const navigation = useNavigation()
     const { signUp } = React.useContext(AuthContext);
@@ -67,7 +67,7 @@ export default function SignupScreen() {
                     .set(data)
                     .then(() => {
                         // alert('yeet')
-                        signUp({ username, password, email, userType })
+                        signUp({ username, password, email, userType, uid })
                         // navigation.navigate('Givr Main', { type: 'User' })
                     })
                     .catch((error) => {
@@ -104,7 +104,7 @@ export default function SignupScreen() {
                     .set(data)
                     .then(() => {
                         // alert('yeet')
-                        signUp({ username, password, email, userType, mainAddress, mailingAddress })
+                        signUp({ username, password, email, userType, mainAddress, mailingAddress, uid })
                         // navigation.navigate('Givr Main', { type: 'User' })
                     })
                     .catch((error) => {
@@ -240,14 +240,14 @@ export default function SignupScreen() {
             <RadioButton.Group onValueChange={newValue => setuserType(newValue)} value={userType}>
                 <View>
                     <Text>Individual</Text>
-                    <RadioButton value="Individual" />
+                    <RadioButton value="User" />
                 </View>
                 <View>
                     <Text>Organization</Text>
                     <RadioButton value="Organization" />
                 </View>
             </RadioButton.Group>
-            {userType == "Individual" ? individualForm : orgForm}
+            {userType == "User" ? individualForm : orgForm}
             <Text
                 onPress={() => navigation.navigate('Login')}
             > Returning user? Login.

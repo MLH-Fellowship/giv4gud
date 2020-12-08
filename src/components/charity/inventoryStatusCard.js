@@ -6,8 +6,10 @@ import inventoryStatus from '../../../data/inventoryStatus';
 /* Add hook to update cards whenever server sends an update */
 
 // Function to create Charity Cards
-export default function StatusCard(charityData){
-    console.log("Charity Status Props", charityData);
+export default function StatusCard(props){
+    console.log("Charity Status Org ID", props.id);
+
+    // Replace inventoryStatus w/ data from firebase
     return(
     <Card>
         <Card.Title> Donation Status </Card.Title>

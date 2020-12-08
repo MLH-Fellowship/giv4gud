@@ -6,12 +6,12 @@ import InventoryStatusCard from '../../components/charity/inventoryStatusCard'
 
 export default function CharityMain(props) {
     const { route, navigation } = props;
-    const data = route.params;
-    // console.log("Charity Main Data", data);
+    const id = route.params.id;
+    console.log("Charity Main IDs", id);
     return(
         <View>
-            <InventoryCard data = {data}/>    
-            <InventoryStatusCard />
+            <InventoryCard id = {id}/>    
+            <InventoryStatusCard id = {id}/>
         </View>
     )
 }

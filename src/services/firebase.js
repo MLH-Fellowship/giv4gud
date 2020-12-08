@@ -1,5 +1,6 @@
 import * as firebase from 'firebase';
 import 'firebase/firestore';
+import AuthContext from "../../Context"
 
 const firebaseConfig = {
     apiKey: "AIzaSyAfeiT7Qp96l-iBUg_4I5ymj4yEc4Cx-k4",
@@ -17,8 +18,10 @@ if (!firebase.apps.length) {
 
 const db = firebase.firestore();
 
-const addDonation = (data) => {
-    db.collection("users").doc("rZwFQ4GlYha2W2PE9khvJrIJF223").update({
+const addDonation = (AuthContext, data) => {
+
+    var uid = AuthContext.uid
+    db.collection("users").doc(uid).set({ // Change to .update()??
         "items": { data }
     })
         .then(function () {

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import * as firebase from 'firebase';
 
 // // Auth
 import SignupScreen from '../screens/auth/SignupScreen';
@@ -112,7 +113,7 @@ function MainNavigation() {
            Return user key / id if exists
            Else dispatch restoreToken */
 
-        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', userType: 'Organization', userID: 'Bobby' }); // Put user id from firebase in userID & replace userType w/ data.user
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', userType: 'Individual', userID: 'Bobby' }); // Put user id from firebase in userID & replace userType w/ data.user
       },
       signOut: () => dispatch({ type: 'SIGN_OUT' }),
       signUp: async data => {

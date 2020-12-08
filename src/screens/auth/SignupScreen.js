@@ -30,19 +30,6 @@ export default function SignupScreen() {
     const [mainAddress, setMainAddress] = useState('')
     const navigation = useNavigation()
     const { signUp } = React.useContext(AuthContext);
-    const data = {
-        stringExample: 'Hello, World!',
-        booleanExample: true,
-        numberExample: 3.14159265,
-        arrayExample: [5, true, 'hello'],
-        nullExample: null,
-        objectExample: {
-            a: 5,
-            b: true
-        }
-    };
-
-    db.collection('data').doc('two').set(data);
 
     const onRegisterUserPress = () => {
         if (password !== confirmPassword) {
@@ -116,7 +103,7 @@ export default function SignupScreen() {
             });
     }
 
-    const individualForm =
+    const userForm =
         <>
             <TextInput
 
@@ -247,7 +234,7 @@ export default function SignupScreen() {
                     <RadioButton value="Organization" />
                 </View>
             </RadioButton.Group>
-            {userType == "User" ? individualForm : orgForm}
+            {userType == "User" ? userForm : orgForm}
             <Text
                 onPress={() => navigation.navigate('Login')}
             > Returning user? Login.

@@ -39,6 +39,12 @@ function LoginScreen() {
                         alert('user');
                         // Call signIn function
                         signIn();
+                        firebase.auth().onAuthStateChanged((user) => {
+                            if (user) {
+                                console.log('User Email: ', user.email, 'UID:', user.uid);
+                            }
+                        });
+                        
                     })
                     .catch(error => {
                         alert(error)

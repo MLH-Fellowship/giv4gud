@@ -38,8 +38,8 @@ function LoginScreen() {
                             return;
                         }
                         alert('yeet');
-                        // Call signIn function
-                        signIn()
+                        // Get UID from firebase & pass into signIn
+                        signIn({ email, password, uid}) // Not sure if uid renders userID
                     })
                     .catch(error => {
                         alert(error)

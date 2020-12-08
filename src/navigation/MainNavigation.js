@@ -51,7 +51,7 @@ function MainNavigation() {
               ...prevState,
               isSignout: false,
               userToken: action.token,
-              userType: action.user,
+              userType: action.userType,
               userID: action.userID,
             };
           case 'SIGN_UP':
@@ -59,7 +59,7 @@ function MainNavigation() {
               ...prevState,
               isSignout: false,
               userToken: action.token,
-              userType: action.user,
+              userType: action.userType,
               userID: action.userID,
             };
           case 'SIGN_OUT':
@@ -107,21 +107,21 @@ function MainNavigation() {
       signIn: async data => {
 
         console.log("Data", data);
-
         /* Check if user exists using firebase 
            Return user key / id if exists
            Else dispatch restoreToken */
 
-        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', user: 'Organization', userID: 'Bobby' }); // Put user id call in userID
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', userType: 'Organization', userID: 'Bobby' }); // Put user id from firebase in userID & replace userType w/ data.user
       },
       signOut: () => dispatch({ type: 'SIGN_OUT' }),
       signUp: async data => {
-
+        console.log("Signup Data", data);
+        console.log("ID", data.uid);
         /* Add user to database
         Return user key / id 
         For SIGN_IN Dispatch, move screen to additional form screen */
 
-        dispatch({ type: 'SIGN_UP', token: 'dummy-auth-token', user: 'Other' });
+        dispatch({ type: 'SIGN_UP', token: 'dummy-auth-token', userType: data.userType, userID: 'filler'}); // Get UID
       },
     }),
     []

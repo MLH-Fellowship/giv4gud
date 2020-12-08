@@ -17,14 +17,16 @@ if (!firebase.apps.length) {
 }
 
 const db = firebase.firestore();
-
+// const user = firebase.auth().currentUser;
+// const userUID = user.uid
 
 const addDonation = (data) => {
     db.collection("users").doc("rZwFQ4GlYha2W2PE9khvJrIJF223").update({
         "items": { data }
     })
         .then(function () {
-            console.log("Document successfully updated!");
+            // console.log("Document successfully updated!");
+            console.log('currentUser')
         })
 }
 

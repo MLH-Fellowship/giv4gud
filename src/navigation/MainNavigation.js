@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+// import { db } from '../services/firebase.js'
+import firebase from 'firebase'
 
 // // Auth
 import SignupScreen from '../screens/auth/SignupScreen';
@@ -33,6 +35,7 @@ function SplashScreen() {
 const Stack = createStackNavigator();
 
 function MainNavigation() {
+
   // Auth Code
   const [state, dispatch] = React.useReducer
     (
@@ -82,6 +85,8 @@ function MainNavigation() {
     );
 
   React.useEffect(() => {
+
+
     // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
       let userToken;
@@ -104,15 +109,34 @@ function MainNavigation() {
 
   const authContext = React.useMemo(
     () => ({
-      signIn: async data => {
 
-        console.log("Data", data);
+      signIn: async data => {
+        const userCurrent = firebase.auth().currentUser;
+        const userCurrentUid = userCurrent.uid
+
+        // || db.collection('organizations')
+        const db = firebase.firestore();
+        const userCurrentType = db.collection('users').where('userType', "==", "individual")
+          .get()
+          .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+              console.log(doc.data());
+              return 'User'
+            })
+          })
+          .catch(function (error) {
+            console.log("Error getting documents: ", error);
+          });
+
+
+        // console.log(userCurrentType)
+        console.log(userCurrentType);
 
         /* Check if user exists using firebase 
            Return user key / id if exists
            Else dispatch restoreToken */
 
-        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', userType: 'Organization', userID: 'Bobby' }); // Put user id from firebase in userID & replace userType w/ data.user
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', userType: userCurrentType, userID: userCurrentUid }); // Put user id from firebase in userID & replace userType w/ data.user
       },
       signOut: () => dispatch({ type: 'SIGN_OUT' }),
       signUp: async data => {
@@ -138,21 +162,22 @@ function MainNavigation() {
           ) : state.userToken == null ? (
             // No token found, user isn't signed in
             <>
-              <Stack.Screen
-                name="SignIn"
-                component={SignupScreen}
-                options={{
-                  title: 'Sign in',
-                  // When logging out, a pop animation feels intuitive
-                  animationTypeForReplace: state.isSignout ? 'pop' : 'push',
-                }}
-              />
 
               <Stack.Screen
                 name="Login"
                 component={LoginScreen}
                 options={{
                   title: 'Login',
+                  // When logging out, a pop animation feels intuitive
+                  animationTypeForReplace: state.isSignout ? 'pop' : 'push',
+                }}
+              />
+
+              <Stack.Screen
+                name="SignIn"
+                component={SignupScreen}
+                options={{
+                  title: 'Sign in',
                   // When logging out, a pop animation feels intuitive
                   animationTypeForReplace: state.isSignout ? 'pop' : 'push',
                 }}
@@ -167,19 +192,19 @@ function MainNavigation() {
               <Stack.Screen
                 name="Givr Main"
                 component={GivrNavigation}
-                initialParams={{id: state.userID}}
+                initialParams={{ id: state.userID }}
               />
 
               <Stack.Screen
                 name="Open Charity"
                 component={CharityScreen}
-                initialParams={{id: state.userID}}
+                initialParams={{ id: state.userID }}
               />
 
               <Stack.Screen
                 name="Donation Form"
                 component={DonationForm}
-                initialParams={{id: state.userID}}
+                initialParams={{ id: state.userID }}
               />
 
             </>
@@ -188,7 +213,7 @@ function MainNavigation() {
                     <Stack.Screen
                       name="Goodr Main"
                       component={CharityNavigation}
-                      initialParams={{id: state.userID}}
+                      initialParams={{ id: state.userID }}
                     />
                   </>
 

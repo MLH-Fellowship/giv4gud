@@ -31,6 +31,7 @@ function LoginScreen() {
                     id: uid,
                     email,
                     password,
+                    userType: "User"
                 };
                 const usersRef = firebase.firestore().collection('users')
                 usersRef
@@ -43,6 +44,7 @@ function LoginScreen() {
                         }
                         alert('user');
                         // Call signIn function
+                        console.log("Data in LoginScreen", data)
                         signIn({ data });
                     })
                     .catch(error => {
@@ -70,8 +72,15 @@ function LoginScreen() {
                             return;
                         }
                         alert('organization');
+                        const data = {
+                            id: uid,
+                            email,
+                            password,
+                            userType: "Organization"
+                        }
+                        console.log("Organization Data", data);
                         // Call signIn function
-                        signIn();
+                        signIn({data});
                     })
                     .catch(error => {
                         alert(error)

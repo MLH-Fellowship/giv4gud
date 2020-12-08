@@ -2,6 +2,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as firebase from 'firebase';
+import { db } from '../services/firebase'
 
 // // Auth
 import SignupScreen from '../screens/auth/SignupScreen';
@@ -107,13 +108,14 @@ function MainNavigation() {
     () => ({
       signIn: async data => {
 
-        console.log("Data", data);
+        console.log("SignIn Data", data);
+        console.log("ID: ", data.uid)
 
         /* Check if user exists using firebase 
            Return user key / id if exists
            Else dispatch restoreToken */
 
-        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', userType: 'Individual', userID: 'Bobby' }); // Put user id from firebase in userID & replace userType w/ data.user
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', userType: "User", userID: "Bobby" }); // Put user id from firebase in userID & replace userType w/ data.user
       },
       signOut: () => dispatch({ type: 'SIGN_OUT' }),
       signUp: async data => {
@@ -140,16 +142,6 @@ function MainNavigation() {
             // No token found, user isn't signed in
             <>
               <Stack.Screen
-                name="SignIn"
-                component={SignupScreen}
-                options={{
-                  title: 'Sign in',
-                  // When logging out, a pop animation feels intuitive
-                  animationTypeForReplace: state.isSignout ? 'pop' : 'push',
-                }}
-              />
-
-              <Stack.Screen
                 name="Login"
                 component={LoginScreen}
                 options={{
@@ -158,7 +150,15 @@ function MainNavigation() {
                   animationTypeForReplace: state.isSignout ? 'pop' : 'push',
                 }}
               />
-
+              <Stack.Screen
+                name="SignIn"
+                component={SignupScreen}
+                options={{
+                  title: 'Sign in',
+                  // When logging out, a pop animation feels intuitive
+                  animationTypeForReplace: state.isSignout ? 'pop' : 'push',
+                }}
+              />
             </>
 
           ) : state.userType == 'User' && state.userToken != null ? (
@@ -168,19 +168,19 @@ function MainNavigation() {
               <Stack.Screen
                 name="Givr Main"
                 component={GivrNavigation}
-                initialParams={{id: state.userID}}
+                initialParams={{ id: state.userID }}
               />
 
               <Stack.Screen
                 name="Open Charity"
                 component={CharityScreen}
-                initialParams={{id: state.userID}}
+                initialParams={{ id: state.userID }}
               />
 
               <Stack.Screen
                 name="Donation Form"
                 component={DonationForm}
-                initialParams={{id: state.userID}}
+                initialParams={{ id: state.userID }}
               />
 
             </>
@@ -189,7 +189,7 @@ function MainNavigation() {
                     <Stack.Screen
                       name="Goodr Main"
                       component={CharityNavigation}
-                      initialParams={{id: state.userID}}
+                      initialParams={{ id: state.userID }}
                     />
                   </>
 

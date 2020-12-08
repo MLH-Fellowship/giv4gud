@@ -27,6 +27,11 @@ function LoginScreen() {
             .signInWithEmailAndPassword(email, password)
             .then((response) => {
                 const uid = response.user.uid
+                const data = {
+                    id: uid,
+                    email,
+                    password,
+                };
                 const usersRef = firebase.firestore().collection('users')
                 usersRef
                     .doc(uid)
@@ -38,13 +43,7 @@ function LoginScreen() {
                         }
                         alert('user');
                         // Call signIn function
-                        signIn();
-                        firebase.auth().onAuthStateChanged((user) => {
-                            if (user) {
-                                console.log('User Email: ', user.email, 'UID:', user.uid);
-                            }
-                        });
-                        
+                        signIn({ data });
                     })
                     .catch(error => {
                         alert(error)

@@ -2,10 +2,8 @@ import React, { Component, useState } from "react";
 import { StyleSheet, View, Button, Text, TextInput, TouchableOpacity } from 'react-native';
 import firebase from 'firebase'
 import { useNavigation } from '@react-navigation/native'
-import { StackNavigator } from 'react-navigation';
 import { Input } from 'react-native-elements';
 import AuthContext from "../../../Context";
-import db from '../../services/firebase'
 
 const styles = StyleSheet.create({
     container: {
@@ -30,19 +28,17 @@ function LoginScreen() {
             .then((response) => {
                 const uid = response.user.uid
                 const usersRef = firebase.firestore().collection('users')
-                const orgsRef = firebase.firestore().collection('organizations')
                 usersRef
                     .doc(uid)
                     .get()
                     .then(firestoreDocument => {
                         if (!firestoreDocument.exists) {
-                            alert("User does not exist anymore.")
+                            onLoginOrgPress()
                             return;
                         }
                         alert('user');
                         // Call signIn function
                         signIn();
-                        alert(response.text)
                     })
                     .catch(error => {
                         alert(error)
@@ -52,85 +48,34 @@ function LoginScreen() {
                 alert(error)
             })
     }
-    // const onLoginPress = () => {
-    //     firebase
-    //         .auth()
-    //         .signInWithEmailAndPassword(email, password)
-    //         .then((response) => {
-    //             const uid = response.user.uid
-    //             const usersRef = firebase.firestore().collection('users')
-    //             const orgsRef = firebase.firestore().collection('organizations')
-    //             usersRef
-    //                 .doc(uid)
-    //                 .get()
-    //                 .then(firestoreDocument => {
-    //                     if (!firestoreDocument.exists) {
-    //                         alert("User does not exist anymore.")
-    //                         return;
-    //                     }
-    //                     alert('yeet');
-    //                     // Call signIn function
 
-    //                 })
-    //                 .catch(error => {
-    //                     alert(error)
-    //                 });
-    //         })
-    //         .catch(error => {
-    //             alert(error)
-    //         })
-    // switch (usersRef.doc(uid)) {
-    // case (usersRef.doc(uid).get()):
-    // case (true):
-    //     usersRef
-    //         .doc(uid)
-    //         .get()
-    //         .then(firestoreDocument => {
-    //             if (!firestoreDocument.exists) {
-    //                 alert("User does not exist anymore.")
-    //                 return;
-    //             }
-    //             alert('user');
-    //             // Call signIn function
-    //             signIn()
-    //             console.log(usersRef.doc(uid))
-    //         })
-    //         .catch(error => {
-    //             alert(error)
-    //         });
-
-    // case (orgsRef.doc(uid).get().then(firestoreDocument => firestoreDocument.exists)):
-    //     console.log(usersRef.doc(uid))
-    //     usersRef.doc(uid)
-    //     alert('organiztion');
-    //     signIn()
-    //     break;
-
-    // .then(firestoreDocument => {
-    //     if (!firestoreDocument.exists) {
-    //         orgsRef.doc(uid)
-    //             .get()
-    //             .then(firestoreDocument => {
-    //                 if (!firestoreDocument.exists) {
-    //                     alert("User does not exist anymore.")
-    //                     return;
-    //                 }
-    //                 alert('organization');
-    //                 // Call signIn function
-    //                 signIn()
-    //                 break
-    //             })
-    //             .catch(error => {
-    //                 alert(error)
-    //             });
-    //     }
-    //     alert('user');
-    //     // Call signIn function
-    //     signIn()
-    // })
-    // .catch(error => {
-    //     alert(error)
-    // });
+    const onLoginOrgPress = () => {
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then((response) => {
+                const uid = response.user.uid
+                const orgsRef = firebase.firestore().collection('organizations')
+                orgsRef
+                    .doc(uid)
+                    .get()
+                    .then(firestoreDocument => {
+                        if (!firestoreDocument.exists) {
+                            alert("Email does not exist anymore.")
+                            return;
+                        }
+                        alert('organization');
+                        // Call signIn function
+                        signIn();
+                    })
+                    .catch(error => {
+                        alert(error)
+                    });
+            })
+            .catch(error => {
+                alert(error)
+            })
+    }
 
     return (
         <View style={styles.container}>

@@ -21,7 +21,7 @@ const db = firebase.firestore();
 const addDonation = (AuthContext, data) => {
 
     var uid = AuthContext.uid
-    db.collection("users").doc(uid).set({
+    db.collection("users").doc(id).set({
         "items": { data }
     })
         .then(function () {

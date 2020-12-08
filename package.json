@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.13.2",
+    "@react-native-community/async-storage": "~1.12.0",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/bottom-tabs": "^5.11.2",
     "@react-navigation/drawer": "^5.11.4",
@@ -19,6 +20,7 @@
     "firebase": "7.9.0",
     "formik": "^2.2.5",
     "react": "16.13.1",
+    "react-app-rewired": "^2.1.7",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz",
     "react-native-elements": "^3.0.0-alpha.1",

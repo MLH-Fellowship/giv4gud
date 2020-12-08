@@ -109,7 +109,7 @@ function MainNavigation() {
       signIn: async data => {
 
         console.log("SignIn Data", data);
-        console.log("ID: ", data.uid)
+        console.log("ID: ", data.data.id)
 
         /* Check if user exists using firebase 
            Return user key / id if exists

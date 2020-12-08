@@ -52,7 +52,7 @@ function MainNavigation() {
               isSignout: false,
               userToken: action.token,
               userType: action.user,
-              userID: action.id,
+              userID: action.userID,
             };
           case 'SIGN_UP':
             return {
@@ -60,7 +60,7 @@ function MainNavigation() {
               isSignout: false,
               userToken: action.token,
               userType: action.user,
-              userID: action.id,
+              userID: action.userID,
             };
           case 'SIGN_OUT':
             return {
@@ -112,7 +112,7 @@ function MainNavigation() {
            Return user key / id if exists
            Else dispatch restoreToken */
 
-        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', user: 'Other' });
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', user: 'Organization', userID: 'Bobby' }); // Put user id call in userID
       },
       signOut: () => dispatch({ type: 'SIGN_OUT' }),
       signUp: async data => {
@@ -166,22 +166,19 @@ function MainNavigation() {
               <Stack.Screen
                 name="Givr Main"
                 component={GivrNavigation}
+                initialParams={{id: state.userID}}
               />
 
               <Stack.Screen
                 name="Open Charity"
                 component={CharityScreen}
-                options={({ route }) => ({
-                  title: route.params.type // Pass User ID & Charity ID in Route
-                })}
+                initialParams={{id: state.userID}}
               />
 
               <Stack.Screen
                 name="Donation Form"
                 component={DonationForm}
-                options={({ route }) => ({
-                  title: route.params.type // Pass User ID & Charity ID in Route
-                })}
+                initialParams={{id: state.userID}}
               />
 
             </>
@@ -190,6 +187,7 @@ function MainNavigation() {
                     <Stack.Screen
                       name="Goodr Main"
                       component={CharityNavigation}
+                      initialParams={{id: state.userID}}
                     />
                   </>
 

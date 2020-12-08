@@ -6,6 +6,8 @@ import 'firebase/firestore';
 import { Input } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native'
 import AuthContext from "../../../Context"
+import { addDonation } from "../../services/firebase"
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -22,16 +24,16 @@ export default function CharityForm() {
     let donationList = [];
 
     const onDonationAdded = () => {
-        let data = 
-            {
+        let data =
+        {
             "name": name,
             "quantity": quantity,
             "priority": priority
-            }
+        }
 
         // Push data to firebase
         /* Insert code here */
-
+        addDonation(data)
         // Validation
         console.log(data);
         alert("Donation Added");
@@ -69,7 +71,7 @@ export default function CharityForm() {
                 underlineColorAndroid="transparent"
                 autoCapitalize="none"
             />
-            
+
             <TouchableOpacity
                 onPress={() => onDonationAdded()}>
                 <Text >Add to List </Text>

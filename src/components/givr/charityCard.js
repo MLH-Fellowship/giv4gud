@@ -4,22 +4,29 @@ import { Card } from 'react-native-elements';
 
 import { useNavigation } from '@react-navigation/native';
 
+// Get data (replace w/ call to Firebase later)
+import charity from "../../../data/charity"
+
 // Function to create Charity Cards
-export default function CharityCard(charityData){
+export default function CharityCard(props){
     
     // Get Navigator Object
     const navigation = useNavigation();
 
-    console.log("Charity Card Data for Givr Main", charityData);
+    // Get User ID (only used for navigation)
+    const id = props.id;
+    console.log("ID in Charity Card", props.id);
+    
+    // Need to get collections from firebase to render cards
     
     return(
     <Card>
         <Card.Title> Charity Card </Card.Title>
-        <Card.Divider />
+        <Card.Divider /> 
         {
-        charityData.data.map((u, i) => {
+        charity.map((u, i) => { // Replace charity w/ data from firebase Note: make sure i is replaced w/ charity document name
             return (
-                <TouchableOpacity key = {i} onPress = {() => navigation.navigate("Open Charity", {data: u})}>
+                <TouchableOpacity key = {i} onPress = {() => navigation.navigate("Open Charity", {id: id, charityID: i})}> 
                     <View style = {styles.cardContainer}>
                         <Text> {u.name} </Text> 
                         <Text> Location: {u.location}</Text>

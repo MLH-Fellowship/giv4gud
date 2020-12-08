@@ -21,24 +21,17 @@ const sampleData =
   }
 ]
 
-// Donation Cards
-function DonationCardGallery(props){
-  return(
-    <View>
-      <Text> HELLLLO </Text>
-      {props.data.map((x, i) => {
-        return(
-          <DonationCard data = {x} id = {i} store = {props.store} key = {i}/>
-        )
-      })}
-    </View>
-  );
-}
+// Weird error about text can't be child of view
 
 function DonationCard(props) {
     const data = props.data;
     const name = data.itemName;
-    const key = props.id
+    const key = props.cardID;
+
+    // User & Charity IDs (most likely won't need)
+    const id = props.id;
+    const charityID = props.charityID;
+    
     const [count, setCount] = useState(0);
 
     return(
@@ -54,13 +47,34 @@ function DonationCard(props) {
         )
 }
 
+// Donation Cards
+function DonationCardGallery(props){
+  const id = props.id;
+  const charityID = props.charityID;
+  return(
+    <View>
+      {props.data.map((x, i) => {
+        return(
+          <DonationCard data = {x} cardID = {i} store = {props.store} key = {i} id = {id} charityID = {charityID}/>
+        )
+      })}
+    </View>
+  );
+}
+
 // Reach: add a way to filter items
 // Reach: add description feature
 
 export default function DonationForm(props) {
     
-    console.log(props.data);
-    // Repalce w/ database call
+    const id = props.id;
+    const charityID = props.charityID;
+
+    // User ID
+    console.log("User & Charity ID", props.id, props.charityID);
+
+    // Replace data w/ firebase call | this is data that should be 
+    // sent back to firebase
     const data = 
       {
       "Shirt": 0,
@@ -68,10 +82,11 @@ export default function DonationForm(props) {
       "Food": 0
       }
 
+  // Stored to prepare data that will be sent back to firebase
   return (
     <View>
-      <DonationCardGallery data={sampleData} store = {data} />
-      <TouchableOpacity onPress={() => console.log(data)} >
+      <DonationCardGallery data={sampleData} store = {data} id = {id} charityID = {charityID}/> {/* Repalce sampleData w/ firebase data */}
+      <TouchableOpacity onPress={() => console.log(data)} > {/* Replace w/ call to add data to database*/}
           <Text> Push this to return </Text>
       </TouchableOpacity>
     </View>

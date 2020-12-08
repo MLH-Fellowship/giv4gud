@@ -18,10 +18,8 @@ if (!firebase.apps.length) {
 
 const db = firebase.firestore();
 
-const addDonation = (AuthContext, data) => {
-
-    var uid = AuthContext.uid
-    db.collection("users").doc(uid).set({
+const addDonation = (data) => {
+    db.collection("users").doc("rZwFQ4GlYha2W2PE9khvJrIJF223").update({
         "items": { data }
     })
         .then(function () {

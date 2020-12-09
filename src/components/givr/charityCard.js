@@ -47,6 +47,8 @@ export default function CharityCard(props) {
     }
 
     React.useEffect(() => {gettingOrgs() }, [])
+
+    console.log('CardData is: ', CardData)
     
     return (
         <>

@@ -15,51 +15,32 @@ export default function FullCharityCard(props) {
     // console.log("Check", charity, data, charityID);
     console.log("CHECK: ", charityID.id)
 
-    const [CardData, setCardData] = React.useState('');
-
-    // async function gettingOrgs() {
-    //     const organizations = await getOrgs();
-    //     setCardData(organizations)
-    // }
-
-    // React.useEffect(() => {gettingOrgs() }, [])
-
-    const oneOrgRef = db.collection('organizations').doc(charityID.id);
-    const getOneOrg = async () => {
-        let org = []
-        await oneOrgRef.get().then(function (doc) {
-            if (doc.exists) {
-                org.push(doc.data())
-                console.log(doc.data())
-            } else {
-                console.log("No org found");
-            }
-        })
-        return org
-    }
+    const [CardData, setCardData] = React.useState(charity);
 
     async function gettingOrg() {
-        const organization = await getOneOrg(charityID.id);
-        setCardData(organization)
+        const organization = await db.collection('organizations').doc(charityID.id).get() // getOneOrg(charityID.id);
+        console.log("Test", organization.data())
+        setCardData(organization.data())
     }
 
     React.useEffect(() => { gettingOrg() }, [])
 
-    console.log("apple", typeof CardData)
-    const items = []
-    items.push(CardData.items)
+    console.log("apple", CardData)
+    let items = Object.keys(CardData.items).join(', ');
+    console.log("test", items)
 
     return (
         <Card>
             <Card.Title>{CardData.name}</Card.Title>
             <Card.Divider />
-            {/* {CardData.map()} */}
+            <View>
                 <Text style={{ marginBottom: 10 }}>
                     Address: {CardData.mailingAddress}
                 </Text>
                 <Text> Location: {CardData.mainAddress} </Text>
                 <Text> Important Needs: {CardData.highNeeds} </Text>
                 <Text> Full Needs: {CardData.fullNeeds} </Text>
+            </View>
         </Card>
     )
 }

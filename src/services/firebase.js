@@ -43,23 +43,8 @@ const getOrgs = async () => {
     return orgs
 }
 
-// const oneOrgRef = db.collection('organizations').doc(charityID.id);
-// const getOneOrg = async () => {
-//     let org = []
-//     await oneOrgRef.get().then(function (doc) {
-//         if (doc.exists) {
-//             org.push(doc.data())
-//             console.log(doc.data())
-//         } else {
-//             console.log("No org found");
-//         }
-//     })
-//     return org
-// }
-
 export {
     db,
     addDonation,
     getOrgs,
-    // getOneOrg
 }

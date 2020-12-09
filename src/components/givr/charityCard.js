@@ -40,7 +40,6 @@ export default function CharityCard(props) {
         console.log("Dummy", charity)
         setCardData(organizations);
     }, []);
-
     return (
         <>
             <Card>
@@ -52,9 +51,8 @@ export default function CharityCard(props) {
                             <TouchableOpacity key={i} onPress={() => navigation.navigate("Open Charity", { id: id, charityID: i })}>
                                 <View style={styles.cardContainer}>
                                     <Text> {u.name} </Text>
-                                    <Text> Location: {u.location}</Text>
-                                    <Text> Needs: {u.highNeeds}</Text>
-                                    <Text> Key: {i} </Text>
+                                    <Text> Location: {u.mainAddress}</Text>
+                                    {/* <Text> Needs: {u.items}</Text> */}
                                 </View>
                             </TouchableOpacity>
                         );

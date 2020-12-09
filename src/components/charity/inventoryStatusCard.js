@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Card } from 'react-native-elements';
 import inventoryStatus from '../../../data/inventoryStatus';
+import { addDonation } from "../../services/firebase"
 
 /* Add hook to update cards whenever server sends an update */
 
 // Function to create Charity Cards
 export default function StatusCard(props){
     console.log("Charity Status Org ID", props.id);
-
+    const [isRejected, setIsRejected] = useState(false);
     // Replace inventoryStatus w/ data from firebase
-    return(
+    if (!isRejected) {
+        return(
     <Card>
         <Card.Title> Donation Status </Card.Title>
         <Card.Divider />
@@ -21,12 +23,12 @@ export default function StatusCard(props){
                         <Text style={styles.itemName}> {u.item} </Text> 
                         <Text style={styles.quantityName}> Quantity: {u.quantity}</Text>
                         <View style = {styles.buttonContainer}> 
-                            <TouchableOpacity onPress={() => console.log("Repalce w/ database API Call")}
+                            <TouchableOpacity onPress={() => addDonation(u, props.id)}
                                               style={styles.buttonStyle}> 
                                 <Text style={styles.buttonName}> Accept </Text>
                             </TouchableOpacity>
 
-                            <TouchableOpacity onPress={() => console.log("Repalce w/ database API Call")}
+                            <TouchableOpacity onPress={() => {setIsRejected(true)}}
                                               style={styles.buttonStyle}> 
                                 <Text style={styles.buttonName}> Reject </Text>
                             </TouchableOpacity>
@@ -36,7 +38,8 @@ export default function StatusCard(props){
         })
         }
     </Card>
-    )
+    );}
+    return (<div></div>);
 }
 
 const styles = StyleSheet.create({

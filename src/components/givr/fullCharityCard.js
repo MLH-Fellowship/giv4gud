@@ -45,23 +45,28 @@ export default function FullCharityCard(props) {
         console.log("Hi there", charityID);
         const organization = await db.collection('organizations').doc(charityID).get() // getOneOrg(charityID.id);
         console.log("Test", organization.data())
-        console.log( "Does this run?", organization);
+        console.log("Does this run?", organization);
         setCardData(organization.data())
     }
 
     React.useEffect(() => { gettingOrg() }, [])
 
     console.log("apple", CardData.items);
-    let items = Object.keys(CardData.items).join(', ');
+    let items;
+    if (CardData.items != null) {
+        items = Object.keys(CardData.items).join(', ');
+    } else {
+        items = 'No items yet'
+    }
     return (
         <Card>
             <View style={styles.containImage}>
                 <Image style={styles.imageContainer}
-                    source={charityPic} 
+                    source={charityPic}
                 />
             </View>
             <Card.Title>{CardData.name}</Card.Title>
-            <Card.Divider/>
+            <Card.Divider />
             <Text> {CardData.mainAddress} </Text>
             <Text> In need of {items} </Text>
         </Card>

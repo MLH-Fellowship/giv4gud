@@ -50,7 +50,7 @@ export default function CharityCard(props) {
         if (u.items != null){
             items = Object.keys(u.items).join(', ');
         } else {
-            items = 'No items yet'
+            items = 'no items yet'
         }
         
         console.log(items, "Hi")

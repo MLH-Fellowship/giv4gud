@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
     donationText: {
         fontSize: 20,
         marginLeft: 20,
-        marginTop: 20
+        marginTop: 20,
+        marginBottom: 20
     }
 })
 

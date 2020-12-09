@@ -52,6 +52,7 @@ function DonationCard(props) {
   const id = props.id;
   const charityID = props.charityID;
 
+
   async function gettingButtonInfo() {
     const organization = await db.collection('organizations').doc(charityID).get()
     console.log("Test", organization.data())
@@ -73,23 +74,33 @@ function DonationCard(props) {
   }
 
   // console.log("dono form", items)
-
+  
   return (
-
-    <TouchableOpacity
-      key={key}
-      onPress={() => {
-        setCount(count + 1);
-        props.store[name] += 1;
-      }}
-      style={styles.card}
-    >
-      <Text> {items} </Text>
+    <View>
+      <Text> {data.itemName} </Text>
       <Text> Quantity: {count} </Text>
-    </TouchableOpacity>
+      <TouchableOpacity
+        key={key}
+        onPress={() => {
+          setCount(count + 1);
+          props.store[name] += 1;
+        }}
+        style={styles.card}
+      >
+      </TouchableOpacity>
+      <TouchableOpacity
+        key={key}
+        onPress={() => {
+          if (count > 0) {
+            setCount(count - 1);
+            props.store[name] -= 1;
+          }
+        }}
+        style={styles.card}
+      >
+      </TouchableOpacity>
+    </View>
   )
-
-
 }
 
 // Donation Cards

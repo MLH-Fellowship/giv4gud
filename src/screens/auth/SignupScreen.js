@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 });
 
 export default function SignupScreen() {
-    const [username, setUsername] = useState('')
+    const [name, setname] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
@@ -78,7 +78,7 @@ export default function SignupScreen() {
                 const data = {
                     id: uid,
                     email,
-                    username,
+                    name,
                     password,
                     userType,
                 };
@@ -88,7 +88,7 @@ export default function SignupScreen() {
                     .set(data)
                     .then(() => {
                         // alert('yeet')
-                        signUp({ username, password, email, userType, uid })
+                        signUp({ name, password, email, userType, uid })
                         // navigation.navigate('Givr Main', { type: 'User' })
                     })
                     .catch((error) => {
@@ -113,7 +113,7 @@ export default function SignupScreen() {
                 const data = {
                     id: uid,
                     email,
-                    username,
+                    name,
                     password,
                     userType,
                     mainAddress,
@@ -125,7 +125,7 @@ export default function SignupScreen() {
                     .set(data)
                     .then(() => {
                         // alert('yeet')
-                        signUp({ username, password, email, userType, mainAddress, mailingAddress, uid })
+                        signUp({ name, password, email, userType, mainAddress, mailingAddress, uid })
                         // navigation.navigate('Givr Main', { type: 'User' })
                     })
                     .catch((error) => {
@@ -141,10 +141,10 @@ export default function SignupScreen() {
         <>
             <TextInput
                 style={styles.input}
-                placeholder='Username'
+                placeholder='name'
                 placeholderTextColor="#aaaaaa"
-                onChangeText={(text) => setUsername(text)}
-                value={username}
+                onChangeText={(text) => setname(text)}
+                value={name}
                 underlineColorAndroid="transparent"
                 autoCapitalize="none"
             />
@@ -191,8 +191,8 @@ export default function SignupScreen() {
                 style={styles.input}
                 placeholder='Orgnanization Name'
                 placeholderTextColor="#aaaaaa"
-                onChangeText={(text) => setUsername(text)}
-                value={username}
+                onChangeText={(text) => setname(text)}
+                value={name}
                 underlineColorAndroid="transparent"
                 autoCapitalize="none"
             />

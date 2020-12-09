@@ -30,13 +30,13 @@ export default function FullCharityCard(props) {
 
     React.useEffect(() => { gettingOrg() }, [])
 
-    console.log("apple", CardData.items);
     let items;
     if (CardData.items != null) {
         items = Object.keys(CardData.items).join(', ');
     } else {
-        items = 'No items yet'
+        items = 'no items yet'
     }
+  
     return (
         <Card>
             <View style={styles.containImage}>

@@ -22,11 +22,13 @@ const db = firebase.firestore();
 const orgRef = db.collection('organizations');
 
 const addDonation = async (data, charityID) => {
-    console.log("Runs");
+    console.log(data);
+    console.log(charityID);
     let docRef = db.collection("organizations").doc(charityID);
     let docRead = await docRef.get();
     let docStuff = docRead.data();
-    docStuff.items[data.name] = data.quantity;
+    console.log(docStuff);
+    docStuff.items[data.item] = data.quantity;
     docRef.update(docStuff);
 }
 

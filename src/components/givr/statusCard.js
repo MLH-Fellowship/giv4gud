@@ -13,18 +13,17 @@ export default function StatusCard(props) {
     // Replace w/ firebase call to load data
     const data = statusData[1];
 
-    return (
-        data.map((u, i) => {
-            const status = u.status
-            return (
-                <View style={styles[status]} key={u.key}>
-                    <Text style={styles.name}> {u.charityName} </Text>
-                    <Text style={styles.item}> Donated {u.items.join(', ')}</Text> {/* Add number soon */}
-                    <Text style={styles.item}> {u.status}</Text>
-                </View>
-            );
-        })
-
+    return(
+    data.map((u, i) => {
+        const status = u.status
+        return (
+            <View style = {styles[status]} key = {u.key}>
+                <Text style = {styles.name}> {u.charityName} </Text> 
+                <Text style = {styles.item}> Donated {u.items.join(', ')}</Text> 
+                <Text style = {styles.item}> {u.status}</Text>
+            </View>
+        );
+    })
     )
 }
 

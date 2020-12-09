@@ -61,25 +61,6 @@ export default function CharityCard(props) {
                     })
                 }
             </Card>
-
-            <Card>
-                <Card.Title> Charity Card </Card.Title>
-                <Card.Divider />
-                {
-                    charity.map((u, i) => { // Replace charity w/ data from firebase Note: make sure i is replaced w/ charity document name
-                        return (
-                            <TouchableOpacity key={i} onPress={() => navigation.navigate("Open Charity", { id: id, charityID: i })}>
-                                <View style={styles.cardContainer}>
-                                    <Text> {u.name} </Text>
-                                    <Text> Location: {u.location}</Text>
-                                    <Text> Needs: {u.highNeeds}</Text>
-                                    <Text> Key: {i} </Text>
-                                </View>
-                            </TouchableOpacity>
-                        );
-                    })
-                }
-            </Card>
         </>
     )
 }

@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, View, Picker, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 import { addDonation } from "../../services/firebase"
 import AuthContext from "../../../Context"
 
@@ -107,6 +107,7 @@ export default function DonationForm(props) {
 
   const id = props.id;
   const charityID = props.charityID;
+  const [shirts, pants, food] = useState(0);
 
   // User ID
   console.log("User & Charity ID", props.id, props.charityID);
@@ -142,11 +143,38 @@ export default function DonationForm(props) {
   // Stored to prepare data that will be sent back to firebase
   return (
     <View style={styles.container}>
-      <DonationCardGallery data={sampleData} store={data} id={id} charityID={charityID} />
+      <View style={styles.radioButton}>
+      <Text>Shirts</Text>
+      <TextInput
+        style={{height: 40, backgroundColor:'white', marginLeft: 10, borderColor: 'black'}}
+        onChangeText={text => setShirts(text)}
+        defaultValue={"0"}
+      />
+      </View>
+
+      <View style={styles.radioButton}>
+      <Text>Pants</Text>
+      <TextInput
+        style={{height: 40, backgroundColor:'white', marginLeft: 10, borderColor: 'black'}}
+        onChangeText={text => setPants(text)}
+        defaultValue={"0"}
+      />
+      </View>
+
+      <View style={styles.radioButton}>
+      <Text>Food</Text>
+      <TextInput
+        style={{height: 40, backgroundColor:'white', marginLeft: 10, borderColor: 'black'}}
+        onChangeText={text => setFood(text)}
+        defaultValue={"0"}
+      />
+      </View>
+
       <TouchableOpacity
         onPress={() => console.log(data)}
         style={styles.submitButton}
-      >
+      > 
+      
         <Text style={styles.buttonText}> Submit Donations </Text>
       </TouchableOpacity>
     </View>
@@ -174,6 +202,7 @@ const styles = StyleSheet.create({
   },
   submitButton: {
     backgroundColor: 'lightblue',
+    marginTop: 10,
     padding: 10,
     borderRadius: 10,
     paddingHorizontal: 30,
@@ -182,6 +211,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  radioButton: {
+    flexDirection: "row",
+    width: 200,
+    marginLeft: 30
+},
   buttonText: {
     fontSize: 20,
 

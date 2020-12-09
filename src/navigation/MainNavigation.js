@@ -44,9 +44,9 @@ function MainNavigation() {
           case 'RESTORE_TOKEN':
             return {
               ...prevState,
-              userToken: "Dummy-token", // action.token,
+              userToken: 'dummy-auth-token', // action.token,
               isLoading: false,
-              userType: "User", // null,
+              userType: 'User', // null,
               userID: null,
             };
           case 'SIGN_IN':
@@ -134,8 +134,14 @@ function MainNavigation() {
               backgroundColor: '#69A579',
               borderBottomLeftRadius: 8,
               borderBottomRightRadius: 8,
-              height: 95,             
+              height: 95,     
+            }, 
+              headerTitleStyle: {
+                fontWeight: 100,
+                fontSize: 40,   
+                fontWeight: 'serif'
             },
+
           }}>
 
           {state.isLoading ? (

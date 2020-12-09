@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Button, Icon } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Button, Icon, Image } from 'react-native';
 import { Card } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
+import charityPic from '../../../charityPic.png';
 
 // Get data (replace w/ call to Firebase later)
 import charity from "../../../data/charity" // Dummy data of charities
@@ -15,6 +16,7 @@ export default function FullCharityCard(props) {
     // console.log("Check", charity, data, charityID);
     console.log("CHECK: ", charityID.id)
     console.log("ID", id);
+    console.log("Props", props)
 
     const [CardData, setCardData] = React.useState(charity[0]);
 
@@ -40,8 +42,8 @@ export default function FullCharityCard(props) {
     // }
 
     async function gettingOrg() {
-        console.log("Hi there");
-        const organization = await db.collection('organizations').doc(charityID.id).get() // getOneOrg(charityID.id);
+        console.log("Hi there", charityID);
+        const organization = await db.collection('organizations').doc(charityID).get() // getOneOrg(charityID.id);
         console.log("Test", organization.data())
         console.log( "Does this run?", organization);
         setCardData(organization.data())
@@ -49,18 +51,19 @@ export default function FullCharityCard(props) {
 
     React.useEffect(() => { gettingOrg() }, [])
 
-    console.log("apple", typeof(CardData))
-
+    console.log("apple", CardData.items);
+    let items = Object.keys(CardData.items).join(', ');
     return (
         <Card>
+            <View style={styles.containImage}>
+                <Image style={styles.imageContainer}
+                    source={charityPic} 
+                />
+            </View>
             <Card.Title>{CardData.name}</Card.Title>
-            <Card.Divider />
-            <Text style={{ marginBottom: 10 }}>
-                Address: {CardData.mailingAddress}
-            </Text>
-            <Text> Location: {CardData.mainAddress} </Text>
-            <Text> Important Needs: {CardData.highNeeds} </Text>
-            <Text> Full Needs: {CardData.fullNeeds} </Text>
+            <Card.Divider/>
+            <Text> {CardData.mainAddress} </Text>
+            <Text> In need of {items} </Text>
         </Card>
     )
 }
@@ -86,5 +89,13 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: 20,
         color: '#fff'
+    },
+    imageContainer: {
+        width: 300,
+        height: 100,
+        alignItems: 'center'
+    },
+    containImage: {
+        alignItems: 'center'
     }
 });

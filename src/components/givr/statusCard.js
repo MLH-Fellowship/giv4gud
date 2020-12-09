@@ -17,11 +17,11 @@ export default function StatusCard(props){
     data.map((u, i) => {
         const status = u.status
         return (
-                <View style = {styles[status]} key = {u.key}>
-                    <Text style = {styles.name}> {u.charityName} </Text> 
-                    <Text style = {styles.item}> Donations: {u.items}</Text>
-                    <Text style = {styles.item}> {u.status}</Text>
-                </View>
+            <View style = {styles[status]} key = {u.key}>
+                <Text style = {styles.name}> {u.charityName} </Text> 
+                <Text style = {styles.item}> Donated {u.items.join(', ')}</Text> {/* Add number soon */}
+                <Text style = {styles.item}> {u.status}</Text>
+            </View>
         );
     })
     // <Card>
@@ -45,22 +45,16 @@ export default function StatusCard(props){
 const styles = StyleSheet.create({
     accepted: {
         margin: 10,
-        borderColor: "black",  
-        borderWidth: 3,
         borderRadius: 5,
-        backgroundColor: "lightgreen"
+        backgroundColor: "#C9D4C5"
     },
     pending: {
         margin: 10,
-        borderColor: "black",  
-        borderWidth: 3,
         borderRadius: 5,
-        backgroundColor: "grey"        
+        backgroundColor: "lightgrey"        
     },
     rejected: {
         margin: 10,
-        borderColor: "black",  
-        borderWidth: 3,
         borderRadius: 5,
         backgroundColor: "red"        
     },

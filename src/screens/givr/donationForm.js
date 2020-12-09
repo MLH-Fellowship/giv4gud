@@ -77,7 +77,7 @@ function DonationCard(props) {
   
   return (
     <View>
-      <Text> {items} </Text>
+      <Text> {data} </Text>
       <Text> Quantity: {count} </Text>
       <TouchableOpacity
         key={key}

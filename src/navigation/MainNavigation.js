@@ -128,7 +128,15 @@ function MainNavigation() {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#69A579',
+              borderBottomLeftRadius: 8,
+              borderBottomRightRadius: 8,
+              height: 95,             
+            },
+          }}>
 
           {state.isLoading ? (
             // We haven't finished checking for the token yet
@@ -141,16 +149,16 @@ function MainNavigation() {
                 name="Login"
                 component={LoginScreen}
                 options={{
-                  title: 'Login',
+                  title: 'Giv4Gud',
                   // When logging out, a pop animation feels intuitive
-                  animationTypeForReplace: state.isSignout ? 'pop' : 'push',
+                  animationTypeForReplace: state.isSignout ? 'pop' : 'push',                  
                 }}
               />
               <Stack.Screen
                 name="SignIn"
                 component={SignupScreen}
                 options={{
-                  title: 'Sign in',
+                  title: 'Giv4Gud',
                   // When logging out, a pop animation feels intuitive
                   animationTypeForReplace: state.isSignout ? 'pop' : 'push',
                 }}
@@ -165,12 +173,22 @@ function MainNavigation() {
                 name="Givr Main"
                 component={GivrNavigation}
                 initialParams={{ id: state.userID }}
+                options={
+                  {
+                  title: "Giv4Gud"
+                  }
+                }
               />
 
               <Stack.Screen
                 name="Open Charity"
                 component={CharityScreen}
                 initialParams={{ id: state.userID }}
+                options={
+                  {
+                  title: "Add Donation"
+                  }
+                }
               />
 
               <Stack.Screen

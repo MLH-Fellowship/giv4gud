@@ -6,8 +6,10 @@ import StatusCard from '../../../components/givr/statusCard'
 export default function StatusScreen(props) {
     const { route, navigation } = props;
     const data = route.params
+    // navigation.setParams({title: "Test"})
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View>
+          <Text> Donation Status </Text>
           <StatusCard data = {data} />
       </View>
     );

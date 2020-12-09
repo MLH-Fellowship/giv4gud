@@ -72,7 +72,21 @@ const styles = StyleSheet.create({
     },
     cardContainer: {
         margin: 10,
-        borderColor: "red",
-        borderWidth: 3
+        backgroundColor: "#C9D4C5",
+        borderRadius: 10,
+        padding: 10
+    },
+    charityCard: {
+    },
+    cardName: {
+        fontSize: 18,
+        paddingBottom: 7,
+        paddingLeft: 5
+    },
+    cardLocation: {
+        padding: 5
+    },
+    cardNeed: {
+        padding: 5
     }
 });

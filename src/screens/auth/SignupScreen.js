@@ -18,6 +18,39 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    input: {
+        margin: 15,
+        width: 200,
+        borderBottomColor: '#C0C0C0',
+        borderBottomWidth: 1,
+        paddingLeft: 10,
+        borderRadius: 4
+        
+     },
+     submitButton: {
+        backgroundColor: '#B67FDD',
+        alignItems: 'center',
+        padding: 10,
+        borderRadius: 10,
+        paddingHorizontal: 40,
+        height: 40,
+        width: 200
+
+     },
+     submitButtonText:{
+        color: 'white'
+     },
+     radioButton: {
+         flexDirection: "row",
+         width: 200
+     },
+     signupText: {
+        fontSize: 30,
+        paddingBottom: 80
+    },
+     other: {
+        marginTop: 20
+     }
 });
 
 export default function SignupScreen() {
@@ -106,7 +139,7 @@ export default function SignupScreen() {
     const userForm =
         <>
             <TextInput
-
+                style={styles.input}
                 placeholder='Username'
                 placeholderTextColor="#aaaaaa"
                 onChangeText={(text) => setUsername(text)}
@@ -116,7 +149,7 @@ export default function SignupScreen() {
             />
 
             <TextInput
-
+                style={styles.input}
                 placeholder='E-mail'
                 placeholderTextColor="#aaaaaa"
                 onChangeText={(text) => setEmail(text)}
@@ -125,7 +158,7 @@ export default function SignupScreen() {
                 autoCapitalize="none"
             />
             <TextInput
-
+                style={styles.input}
                 placeholderTextColor="#aaaaaa"
                 secureTextEntry
                 placeholder='Password'
@@ -135,7 +168,7 @@ export default function SignupScreen() {
                 autoCapitalize="none"
             />
             <TextInput
-
+                style={styles.input}
                 placeholderTextColor="#aaaaaa"
                 secureTextEntry
                 placeholder='Confirm Password'
@@ -145,17 +178,16 @@ export default function SignupScreen() {
                 autoCapitalize="none"
             />
             <TouchableOpacity
-
+                style={styles.submitButton}
                 onPress={() => onRegisterUserPress()}>
                 <Text >Create account</Text>
-
             </TouchableOpacity>
         </>
 
     const orgForm =
         <>
             <TextInput
-
+                style={styles.input}
                 placeholder='Orgnanization Name'
                 placeholderTextColor="#aaaaaa"
                 onChangeText={(text) => setUsername(text)}
@@ -165,7 +197,7 @@ export default function SignupScreen() {
             />
 
             <TextInput
-
+                style={styles.input}
                 placeholder='Organization E-mail'
                 placeholderTextColor="#aaaaaa"
                 onChangeText={(text) => setEmail(text)}
@@ -174,7 +206,7 @@ export default function SignupScreen() {
                 autoCapitalize="none"
             />
             <TextInput
-
+                style={styles.input}
                 placeholderTextColor="#aaaaaa"
                 secureTextEntry
                 placeholder='Password'
@@ -184,7 +216,7 @@ export default function SignupScreen() {
                 autoCapitalize="none"
             />
             <TextInput
-
+                style={styles.input}
                 placeholderTextColor="#aaaaaa"
                 secureTextEntry
                 placeholder='Confirm Password'
@@ -195,7 +227,7 @@ export default function SignupScreen() {
             />
 
             <TextInput
-
+                style={styles.input}
                 placeholderTextColor="#aaaaaa"
                 placeholder='Main Address'
                 onChangeText={(text) => setMainAddress(text)}
@@ -205,7 +237,7 @@ export default function SignupScreen() {
             />
 
             <TextInput
-
+                style={styles.input}
                 placeholderTextColor="#aaaaaa"
                 placeholder='Mailing Address'
                 onChangeText={(text) => setMailingAddress(text)}
@@ -215,30 +247,34 @@ export default function SignupScreen() {
             />
 
             <TouchableOpacity
-
+                style={styles.submitButton}
                 onPress={() => onRegisterOrgPress()}>
                 <Text >Create account</Text>
-
             </TouchableOpacity>
         </>
     return (
         <View style={styles.container}>
-
-            <RadioButton.Group onValueChange={newValue => setuserType(newValue)} value={userType}>
-                <View>
+            <Text style={styles.signupText}> Sign Up </Text>
+            <RadioButton.Group 
+                onValueChange={newValue => setuserType(newValue)} 
+                value={userType}
+            >
+                <View style={styles.radioButton}>
                     <Text>Individual</Text>
                     <RadioButton value="User" />
                 </View>
-                <View>
+                <View style={styles.radioButton}>
                     <Text>Organization</Text>
                     <RadioButton value="Organization" />
                 </View>
             </RadioButton.Group>
             {userType == "User" ? userForm : orgForm}
-            <Text
-                onPress={() => navigation.navigate('Login')}
-            > Returning user? Login.
-            </Text>
+            <View style = {styles.other}>
+                <Text
+                    onPress={() => navigation.navigate('Login')}
+                > Returning user? Login.
+                </Text>
+            </View>
         </View>
     )
 }

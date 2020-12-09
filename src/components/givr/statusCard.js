@@ -6,10 +6,10 @@ import statusData from '../../../data/givr';
 /* Add hook to update cards whenever server sends an update */
 
 // Function to create Charity Cards
-export default function StatusCard(props){
+export default function StatusCard(props) {
     // Gets firebase user ID
     console.log("User ID", props.id);
-    
+
     // Replace w/ firebase call to load data
     const data = statusData[1];
 
@@ -36,12 +36,12 @@ const styles = StyleSheet.create({
     pending: {
         margin: 10,
         borderRadius: 5,
-        backgroundColor: "lightgrey"        
+        backgroundColor: "lightgrey"
     },
     rejected: {
         margin: 10,
         borderRadius: 5,
-        backgroundColor: "red"        
+        backgroundColor: "red"
     },
     name: {
         fontSize: 20,

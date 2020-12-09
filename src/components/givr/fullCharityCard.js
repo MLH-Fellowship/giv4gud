@@ -45,18 +45,21 @@ export default function FullCharityCard(props) {
 
     React.useEffect(() => { gettingOrg() }, [])
 
-    console.log("apple", CardData)
+    console.log("apple", typeof CardData)
+    const items = []
+    items.push(CardData.items)
 
     return (
         <Card>
             <Card.Title>{CardData.name}</Card.Title>
             <Card.Divider />
-            <Text style={{ marginBottom: 10 }}>
-                Address: {CardData.mailingAddress}
-            </Text>
-            <Text> Location: {CardData.mainAddress} </Text>
-            <Text> Important Needs: {CardData.highNeeds} </Text>
-            <Text> Full Needs: {CardData.fullNeeds} </Text>
+            {/* {CardData.map()} */}
+                <Text style={{ marginBottom: 10 }}>
+                    Address: {CardData.mailingAddress}
+                </Text>
+                <Text> Location: {CardData.mainAddress} </Text>
+                <Text> Important Needs: {CardData.highNeeds} </Text>
+                <Text> Full Needs: {CardData.fullNeeds} </Text>
         </Card>
     )
 }

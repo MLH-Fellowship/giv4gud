@@ -19,7 +19,7 @@ export default function CharityNavigation(props) {
   return (
     <Tab.Navigator initialRouteName='Home'>
       <Tab.Screen name="Home" component={CharityMain} initialParams={{ id: id }} />
-      <Tab.Screen name="Donation Status" component={InventoryScreen} initialParams={{ id: id }} />
+      <Tab.Screen name="Add Donation" component={InventoryScreen} initialParams={{ id: id }} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
   );

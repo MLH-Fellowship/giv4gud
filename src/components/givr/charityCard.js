@@ -29,52 +29,48 @@ export default function CharityCard(props) {
     const [CardData, setCardData] = React.useState(charity);
     // Get Navigator Object
     const navigation = useNavigation();
-
+    console.log("Cards", CardData);
     // Get User ID (only used for navigation)
     const id = props.id;
     console.log("User ID in Charity Card", props.id);
-
-    // React.useEffect(async () => {
-    //     const organizations = await getOrgs();
-    //     console.log("Orgs", organizations)
-    //     console.log("Dummy", charity)
-    //     setCardData(organizations);
-    // }, []);
+    console.log("test", props);
 
     async function gettingOrgs() {
         const organizations = await getOrgs();
+        console.log("hi");        
         setCardData(organizations)
     }
 
     React.useEffect(() => {gettingOrgs() }, [])
-
-    console.log('CardData is: ', CardData)
+    console.log("Card Data", CardData)
     
-    return (
+    return(
+    CardData.map((u, i) => { // Replace charity w/ data from firebase Note: make sure i is replaced w/ charity document name
+        let items;
+        if (u.items != null){
+            items = Object.keys(u.items).join(', ');
+        } else {
+            items = 'No items yet'
+        }
+        
+        console.log(items, "Hi")
+        return (
         <>
-            <Card>
-                <Card.Title> Charity Card </Card.Title>
-                <Card.Divider />
-                {
-                    CardData.map((u, i) => { // Replace charity w/ data from firebase Note: make sure i is replaced w/ charity document name
-                        // console.log(i)
-                        // console.log(u)
-                        // console.log(u.id)
-                        return (
-                            <TouchableOpacity key={i} onPress={() => navigation.navigate("Open Charity", { id: id, charityID: u })}>
-                                <View style={styles.cardContainer}>
-                                    <Text> {u.name} </Text>
-                                    <Text> Location: {u.mainAddress}</Text>
-                                    {/* <Text> Needs: {u.items}</Text> */}
-                                </View>
-                            </TouchableOpacity>
-                        );
-                    })
-                }
-            </Card>
+            <TouchableOpacity 
+                key = {i} 
+                onPress = {() => navigation.navigate("Open Charity", {id: id, charityID: u.id})}
+                style={styles.charityCard}
+            >
+                <View style = {styles.cardContainer}>
+                    <Text style={styles.cardName}> {u.name} </Text> 
+                    <Text style={styles.cardLocation}> {u.mainAddress} </Text>
+                    <Text style={styles.cardNeed}> In need of {items} </Text>
+                </View>
+            </TouchableOpacity>
         </>
-    )
-}
+            )
+    }
+))}
 
 const styles = StyleSheet.create({
     container: {
@@ -82,7 +78,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'lightblue'
     },
     cardContainer: {
-        margin: 10,
+        marginVertical: 10,
         backgroundColor: "#C9D4C5",
         borderRadius: 10,
         padding: 10
@@ -90,14 +86,18 @@ const styles = StyleSheet.create({
     charityCard: {
     },
     cardName: {
-        fontSize: 18,
-        paddingBottom: 7,
-        paddingLeft: 5
+        fontSize: 21,
+        // paddingBottom: 7,
+        paddingLeft: 5,
+        fontFamily: 'serif',
     },
     cardLocation: {
-        padding: 5
+        paddingBottom: 5,
+        paddingLeft: 6,
+        fontSize: 12,
     },
     cardNeed: {
-        padding: 5
+        padding: 5,
+        fontSize: 15,
     }
 });

@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import firebase from "firebase";
 import AuthContext from "../../../../Context";
+import charityPic from '../../../../charityPic.png';
 
 export default function SettingsScreen() {
   const { signOut } = React.useContext(AuthContext)
@@ -17,15 +18,15 @@ export default function SettingsScreen() {
         alert(error)
       });
   };
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>FORM </Text>
-      <Text>Name, Address, phone #, email, password change </Text>
-      <Text> Button to update changes </Text>
-      <TouchableOpacity
-        onPress={() => handleLogout()}>
-        <Text>Logout</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        {/* <Text>FORM </Text>
+        <Text>Name, Address, phone #, email, password change </Text>
+        <Text> Button to update changes </Text> */}
+        <TouchableOpacity
+          onPress={() => handleLogout()}>
+          <Text >Logout</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }

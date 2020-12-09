@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Button, Icon } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Button, Icon, Image } from 'react-native';
 import { Card } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
+import charityPic from '../../../charityPic.png';
 
 // Get data (replace w/ call to Firebase later)
 import charity from "../../../data/charity" // Dummy data of charities
@@ -14,33 +15,55 @@ export default function FullCharityCard(props) {
     const data = charity[charityID];
     // console.log("Check", charity, data, charityID);
     console.log("CHECK: ", charityID.id)
+    console.log("ID", id);
+    console.log("Props", props)
 
-    const [CardData, setCardData] = React.useState(charity);
+    const [CardData, setCardData] = React.useState(charity[0]);
+
+    // async function gettingOrgs() {
+    //     const organizations = await getOrgs();
+    //     setCardData(organizations)
+    // }
+
+    // React.useEffect(() => {gettingOrgs() }, [])
+
+    // const oneOrgRef = db.collection('organizations').doc(charityID.id);
+    // const getOneOrg = async () => {
+    //     let org = []
+    //     await oneOrgRef.get().then(function (doc) {
+    //         if (doc.exists) {
+    //             org.push(doc.data())
+    //             console.log(doc.data())
+    //         } else {
+    //             console.log("No org found");
+    //         }
+    //     })
+    //     return org
+    // }
 
     async function gettingOrg() {
-        const organization = await db.collection('organizations').doc(charityID.id).get() // getOneOrg(charityID.id);
+        console.log("Hi there", charityID);
+        const organization = await db.collection('organizations').doc(charityID).get() // getOneOrg(charityID.id);
         console.log("Test", organization.data())
+        console.log( "Does this run?", organization);
         setCardData(organization.data())
     }
 
     React.useEffect(() => { gettingOrg() }, [])
 
-    console.log("apple", CardData)
+    console.log("apple", CardData.items);
     let items = Object.keys(CardData.items).join(', ');
-    console.log("test", items)
-
     return (
         <Card>
-            <Card.Title>{CardData.name}</Card.Title>
-            <Card.Divider />
-            <View>
-                <Text style={{ marginBottom: 10 }}>
-                    Address: {CardData.mailingAddress}
-                </Text>
-                <Text> Location: {CardData.mainAddress} </Text>
-                <Text> Important Needs: {CardData.highNeeds} </Text>
-                <Text> Full Needs: {CardData.fullNeeds} </Text>
+            <View style={styles.containImage}>
+                <Image style={styles.imageContainer}
+                    source={charityPic} 
+                />
             </View>
+            <Card.Title>{CardData.name}</Card.Title>
+            <Card.Divider/>
+            <Text> {CardData.mainAddress} </Text>
+            <Text> In need of {items} </Text>
         </Card>
     )
 }
@@ -66,5 +89,13 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: 20,
         color: '#fff'
+    },
+    imageContainer: {
+        width: 300,
+        height: 100,
+        alignItems: 'center'
+    },
+    containImage: {
+        alignItems: 'center'
     }
 });

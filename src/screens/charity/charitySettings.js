@@ -21,9 +21,9 @@ export default function SettingsScreen() {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>FORM </Text>
+      {/* <Text>FORM </Text>
       <Text>Name, Address, phone #, email, password change </Text>
-      <Text> Button to update changes </Text>
+      <Text> Button to update changes </Text> */}
       <TouchableOpacity
 
         onPress={() => handleLogout()}>

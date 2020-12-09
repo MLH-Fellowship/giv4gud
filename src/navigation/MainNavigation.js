@@ -18,7 +18,7 @@ import CharityNavigation from "./CharityNavigation";
 
 // Import Auth
 import AuthContext from "../../Context"
-import { Button, Text, TextInput, View } from 'react-native';
+import { Button, Text, TextInput, View, Image } from 'react-native';
 
 // Fix AsyncStorage if time permits
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -29,6 +29,16 @@ function SplashScreen() {
     <View>
       <Text>Loading...</Text>
     </View>
+  );
+}
+
+// Image Screen
+function LogoTitle() {
+  return (
+    <Image
+      style={{ width: 100, height: 100, resizeMode: 'contain' }}
+      source={require('../../gfg.png')}
+    />
   );
 }
 
@@ -46,7 +56,7 @@ function MainNavigation() {
               ...prevState,
               userToken: action.token, // action.token,
               isLoading: false,
-              userType: null, // null,
+              userType: 'Organization', // null,
               userID: null,
             };
           case 'SIGN_IN':
@@ -131,13 +141,12 @@ function MainNavigation() {
         <Stack.Navigator
           screenOptions={{
             headerStyle: {
-              backgroundColor: '#69A579',
+              backgroundColor: '#a1dff7',
               borderBottomLeftRadius: 8,
               borderBottomRightRadius: 8,
               height: 95,     
             }, 
               headerTitleStyle: {
-                fontWeight: 100,
                 fontSize: 40,   
                 fontWeight: 'serif'
             },
@@ -158,6 +167,7 @@ function MainNavigation() {
                   title: 'Giv4Gud',
                   // When logging out, a pop animation feels intuitive
                   animationTypeForReplace: state.isSignout ? 'pop' : 'push',                  
+                  headerTitle: props => <LogoTitle {...props} />
                 }}
               />
               <Stack.Screen
@@ -181,7 +191,8 @@ function MainNavigation() {
                 initialParams={{ id: state.userID }}
                 options={
                   {
-                  title: "Giv4Gud"
+                  title: "Giv4Gud",
+                  headerTitle: props => <LogoTitle {...props} />
                   }
                 }
               />

@@ -19,26 +19,11 @@ export default function StatusCard(props){
         return (
             <View style = {styles[status]} key = {u.key}>
                 <Text style = {styles.name}> {u.charityName} </Text> 
-                <Text style = {styles.item}> Donated {u.items.join(', ')}</Text> {/* Add number soon */}
+                <Text style = {styles.item}> Donated {u.items.join(', ')}</Text> 
                 <Text style = {styles.item}> {u.status}</Text>
             </View>
         );
     })
-    // <Card>
-    //     <Card.Title> Donation Status </Card.Title>
-    //     <Card.Divider />
-    //     {
-    //     data.map((u, i) => {
-    //         return (
-    //                 <View style = {styles.cardContainer} key = {u.key}>
-    //                     <Text> Name: {u.charityName} </Text> 
-    //                     <Text> Items: {u.items}</Text>
-    //                     <Text> Status: {u.status}</Text>
-    //                 </View>
-    //         );
-    //     })
-    //     }
-    // </Card>
     )
 }
 

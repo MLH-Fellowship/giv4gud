@@ -1,5 +1,5 @@
 # Giv4Gud
-![assets/g4glogo.png](giv4good logo)
+![giv4good logo](assets/g4glogo.png)
 
 *an app that connects individuals to local shelters to donate their excess items* 
 

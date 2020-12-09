@@ -17,15 +17,15 @@ export default function SettingsScreen() {
         alert(error)
       });
   };
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>FORM </Text>
-        <Text>Name, Address, phone #, email, password change </Text>
-        <Text> Button to update changes </Text>
-        <TouchableOpacity
-          onPress={() => handleLogout()}>
-          <Text >Logout</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>FORM </Text>
+      <Text>Name, Address, phone #, email, password change </Text>
+      <Text> Button to update changes </Text>
+      <TouchableOpacity
+        onPress={() => handleLogout()}>
+        <Text>Logout</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}

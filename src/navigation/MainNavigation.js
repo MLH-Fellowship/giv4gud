@@ -131,8 +131,13 @@ function MainNavigation() {
               backgroundColor: '#69A579',
               borderBottomLeftRadius: 8,
               borderBottomRightRadius: 8,
-              height: 95,             
+              height: 95,     
+            }, 
+              headerTitleStyle: {
+                fontWeight: 100,
+                fontSize: 50   
             },
+
           }}>
 
           {state.isLoading ? (

@@ -46,12 +46,13 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function CharityForm() {
+export default function CharityForm(props) {
     const [name, setName] = useState('')
     const [quantity, setQuantity] = useState('')
+    const id = props.id
     let donationList = [];
-
-    const onDonationAdded = () => {
+    console.log("ID", props);
+    const onDonationAdded = async () => {
         let data =
         {
             "name": name,
@@ -60,7 +61,7 @@ export default function CharityForm() {
 
         // Push data to firebase
         /* Insert code here */
-        addDonation(data)
+        await addDonation(data, id);
         // Validation
         console.log(data);
         alert("Donation Added");

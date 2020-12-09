@@ -1,7 +1,6 @@
 # Giv4Gud
-<img src="assets/g4glogo.png"
-     alt="Giv4Gud logo"
-     style="width: 10px;" />
+
+<img src="assets/g4glogo.png" alt="logo" width="200px;"/>
 
 *an app that connects individuals to local shelters to donate their excess items* 
 

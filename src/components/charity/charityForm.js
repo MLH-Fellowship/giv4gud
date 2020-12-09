@@ -12,14 +12,43 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
+        paddingBottom: 20
     },
+    input: {
+        margin: 15,
+        height: 40,
+        width: 200,
+        borderBottomColor: '#C0C0C0',
+        borderBottomWidth: 1,
+        paddingLeft: 10,
+        borderRadius: 4
+        
+     },
+     submitButton: {
+        backgroundColor: '#B67FDD',
+        padding: 10,
+        paddingHorizontal: 50,
+        alignItems: 'center',
+        borderRadius: 10
+     },
+     submitButtonText:{
+        color: 'white'
+     },
+     other: {
+        marginTop: 20
+     },
+     loginText: {
+         fontSize: 25,
+         textAlign: 'left'
+     },
+     FormText: {
+        fontSize: 25
+    }
 });
 
 export default function CharityForm() {
     const [name, setName] = useState('')
     const [quantity, setQuantity] = useState('')
-    const [priority, setPriority] = useState('')
     let donationList = [];
 
     const onDonationAdded = () => {
@@ -27,7 +56,6 @@ export default function CharityForm() {
         {
             "name": name,
             "quantity": quantity,
-            "priority": priority
         }
 
         // Push data to firebase
@@ -40,11 +68,11 @@ export default function CharityForm() {
 
     return (
         <View style={styles.container}>
-            <Text> Donation List </Text>
+            <Text style={styles.loginText}> Donation List </Text>
             <Text> {donationList} </Text>
-            <Text> Add Donation Need </Text>
+            <Text style={styles.loginText}> Add Donation Need </Text>
             <TextInput
-
+                style={styles.input}
                 placeholder='Item Name'
                 placeholderTextColor="#aaaaaa"
                 onChangeText={(text) => setName(text)}
@@ -53,7 +81,7 @@ export default function CharityForm() {
                 autoCapitalize="none"
             />
             <TextInput
-
+                style={styles.input}
                 placeholder='Quantity Needed'
                 placeholderTextColor="#aaaaaa"
                 onChangeText={(text) => setQuantity(text)}
@@ -61,18 +89,11 @@ export default function CharityForm() {
                 underlineColorAndroid="transparent"
                 autoCapitalize="none"
             />
-            <TextInput
-
-                placeholderTextColor="#aaaaaa"
-                placeholder='Priority'
-                onChangeText={(text) => setPriority(text)}
-                value={priority}
-                underlineColorAndroid="transparent"
-                autoCapitalize="none"
-            />
 
             <TouchableOpacity
-                onPress={() => onDonationAdded()}>
+                onPress={() => onDonationAdded()}
+                style={styles.submitButton}
+            >
                 <Text >Add to List </Text>
             </TouchableOpacity>
 

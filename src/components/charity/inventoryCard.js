@@ -20,8 +20,8 @@ export default function InventoryCard(props) {
             data.map((u, i) => {
                 return (
                         <View style = {styles.cardContainer} key = {i}>
-                            <Text> Name: {u.name} </Text> 
-                            <Text> Quantity: {u.quantity} </Text> 
+                            <Text style = {styles.itemName}> Item: {u.name} </Text> 
+                            <Text style = {styles.quantityName}> Quantity: {u.quantity} </Text> 
                         </View>
                 );
             })
@@ -31,13 +31,16 @@ export default function InventoryCard(props) {
     }
     
 const styles = StyleSheet.create({
-    container: {
-        padding: 0,
-        backgroundColor: 'lightblue'        
-        },
     cardContainer: {
+        flexDirection: 'row',
         margin: 10,
-        borderColor: "red",
-        borderWidth: 3
+        backgroundColor: "#C9D4C5",
+        borderRadius: 3
+    },
+    itemName: {
+        fontSize: 17
+    },
+    quantityName: {
+        fontSize: 17
     }
 });

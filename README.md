@@ -22,7 +22,7 @@ On the other hand, the organization will be able to create a donation list that 
 
 # Deployment: 
 
-TBA
+[Preview it here!](https://expo.io/@cdalangin/projects/giv4gud)
 
 ## Made with ❤️ by Pod 1.1.6:
 | Cirill Dalangin | Gerald Marquez | Prionti Nasir | Caleb Lim |

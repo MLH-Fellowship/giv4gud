@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     },
     cardContainer: {
         marginVertical: 10,
-        backgroundColor: "#C9D4C5",
+        backgroundColor: '#5ebdf0',
         borderRadius: 10,
         padding: 10
     },

@@ -21,16 +21,16 @@ const db = firebase.firestore();
 // const userUID = user.uid
 const orgRef = db.collection('organizations');
 
-const addDonation = (data) => {
-    db.collection("users").doc("rZwFQ4GlYha2W2PE9khvJrIJF223").update({
-        "items": { data }
-    })
-        .then(function () {
-            // console.log("Document successfully updated!");
-            console.log('currentUser')
-        })
+const addDonation = async (data, charityID) => {
+    console.log(data);
+    console.log(charityID);
+    let docRef = db.collection("organizations").doc(charityID);
+    let docRead = await docRef.get();
+    let docStuff = docRead.data();
+    console.log(docStuff);
+    docStuff.items[data.item] = data.quantity;
+    docRef.update(docStuff);
 }
-
 
 const getOrgs = async () => {
     let orgs = []

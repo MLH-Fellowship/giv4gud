@@ -8,7 +8,7 @@ export default function InventoryStatusScreen(props) {
     const data = route.params;
     return(
         <View>
-            <CharityForm />    
+            <CharityForm id={data.id}/>    
         </View>
     )
 }

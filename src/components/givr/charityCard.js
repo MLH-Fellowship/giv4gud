@@ -46,7 +46,13 @@ export default function CharityCard(props) {
     
     return(
     CardData.map((u, i) => { // Replace charity w/ data from firebase Note: make sure i is replaced w/ charity document name
-        let items = Object.keys(u.items).join(' ,');
+        let items;
+        if (u.items != null){
+            items = Object.keys(u.items).join(', ');
+        } else {
+            items = 'No items yet'
+        }
+        
         console.log(items, "Hi")
         return (
         <>

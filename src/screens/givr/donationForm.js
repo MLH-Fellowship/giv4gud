@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { addDonation } from "../../services/firebase"
+import AuthContext from "../../../Context"
 
 // Data *delete once integrated w/ database*
 const sampleData = 
@@ -104,6 +106,25 @@ export default function DonationForm(props) {
       "Pants": 0,
       "Food": 0
       }
+    
+    // Gerald's add donation stuff
+    let donationList = [];
+
+    const onDonationAdded = () => {
+        let data =
+        {
+            "name": name,
+            "quantity": quantity,
+            "priority": priority
+        }
+
+        // Push data to firebase
+        /* Insert code here */
+        addDonation(data)
+        // Validation
+        console.log(data);
+        alert("Donation Added");
+    }
 
   // Stored to prepare data that will be sent back to firebase
   return (

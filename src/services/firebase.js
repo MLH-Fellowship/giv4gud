@@ -19,6 +19,7 @@ if (!firebase.apps.length) {
 const db = firebase.firestore();
 // const user = firebase.auth().currentUser;
 // const userUID = user.uid
+const orgRef = db.collection('organizations');
 
 const addDonation = (data) => {
     db.collection("users").doc("rZwFQ4GlYha2W2PE9khvJrIJF223").update({
@@ -30,7 +31,31 @@ const addDonation = (data) => {
         })
 }
 
+
+const getOrgs = async () => {
+    let orgs = []
+    await orgRef.get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+            orgs.push(doc.data())
+            // console.log(doc.data())
+        })
+    })
+    return orgs
+}
+
+const getOneOrg = async () => {
+    let org = []
+    await orgRef.get().then(function (querySnapshot) {
+        querySnapshot(function (doc) {
+            org.push(doc.data)
+        })
+    })
+    return org
+}
+
 export {
     db,
     addDonation,
+    getOrgs,
+    getOneOrg
 }

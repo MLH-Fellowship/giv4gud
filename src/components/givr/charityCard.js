@@ -5,23 +5,23 @@ import { Card } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 
 // Get data (replace w/ call to Firebase later)
-import { db } from '../../services/firebase' // allows call database
+import { db, getOrgs } from '../../services/firebase' // allows call database
 import 'firebase/firestore'
 import charity from "../../../data/charity"
 
 // Get Firebase Data
 // Need to get collections from firebase to render cards
-var orgRef = db.collection('organizations');
-const getOrgs = async () => {
-    let orgs = []
-    await orgRef.get().then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-            orgs.push(doc.data())
-            console.log(doc.data())
-        })
-    })
-    return orgs
-}
+// const orgRef = db.collection('organizations');
+// const getOrgs = async () => {
+//     let orgs = []
+//     await orgRef.get().then(function (querySnapshot) {
+//         querySnapshot.forEach(function (doc) {
+//             orgs.push(doc.data())
+//             console.log(doc.data())
+//         })
+//     })
+//     return orgs
+// }
 
 // Function to create Charity Cards
 export default function CharityCard(props) {
@@ -32,14 +32,22 @@ export default function CharityCard(props) {
 
     // Get User ID (only used for navigation)
     const id = props.id;
-    console.log("ID in Charity Card", props.id);
+    console.log("User ID in Charity Card", props.id);
 
-    React.useEffect(async () => {
+    // React.useEffect(async () => {
+    //     const organizations = await getOrgs();
+    //     console.log("Orgs", organizations)
+    //     console.log("Dummy", charity)
+    //     setCardData(organizations);
+    // }, []);
+
+    async function gettingOrgs() {
         const organizations = await getOrgs();
-        console.log("Orgs", organizations)
-        console.log("Dummy", charity)
-        setCardData(organizations);
-    }, []);
+        setCardData(organizations)
+    }
+
+    React.useEffect(() => {gettingOrgs() }, [])
+    
     return (
         <>
             <Card>
@@ -47,8 +55,11 @@ export default function CharityCard(props) {
                 <Card.Divider />
                 {
                     CardData.map((u, i) => { // Replace charity w/ data from firebase Note: make sure i is replaced w/ charity document name
+                        // console.log(i)
+                        // console.log(u)
+                        // console.log(u.id)
                         return (
-                            <TouchableOpacity key={i} onPress={() => navigation.navigate("Open Charity", { id: id, charityID: i })}>
+                            <TouchableOpacity key={i} onPress={() => navigation.navigate("Open Charity", { id: id, charityID: u })}>
                                 <View style={styles.cardContainer}>
                                     <Text> {u.name} </Text>
                                     <Text> Location: {u.mainAddress}</Text>

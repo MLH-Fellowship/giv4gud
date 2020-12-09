@@ -6,39 +6,25 @@ import statusData from '../../../data/givr';
 /* Add hook to update cards whenever server sends an update */
 
 // Function to create Charity Cards
-export default function StatusCard(props){
+export default function StatusCard(props) {
     // Gets firebase user ID
     console.log("User ID", props.id);
-    
+
     // Replace w/ firebase call to load data
     const data = statusData[1];
 
-    return(
-    data.map((u, i) => {
-        const status = u.status
-        return (
-            <View style = {styles[status]} key = {u.key}>
-                <Text style = {styles.name}> {u.charityName} </Text> 
-                <Text style = {styles.item}> Donated {u.items.join(', ')}</Text> {/* Add number soon */}
-                <Text style = {styles.item}> {u.status}</Text>
-            </View>
-        );
-    })
-    // <Card>
-    //     <Card.Title> Donation Status </Card.Title>
-    //     <Card.Divider />
-    //     {
-    //     data.map((u, i) => {
-    //         return (
-    //                 <View style = {styles.cardContainer} key = {u.key}>
-    //                     <Text> Name: {u.charityName} </Text> 
-    //                     <Text> Items: {u.items}</Text>
-    //                     <Text> Status: {u.status}</Text>
-    //                 </View>
-    //         );
-    //     })
-    //     }
-    // </Card>
+    return (
+        data.map((u, i) => {
+            const status = u.status
+            return (
+                <View style={styles[status]} key={u.key}>
+                    <Text style={styles.name}> {u.charityName} </Text>
+                    <Text style={styles.item}> Donated {u.items.join(', ')}</Text> {/* Add number soon */}
+                    <Text style={styles.item}> {u.status}</Text>
+                </View>
+            );
+        })
+
     )
 }
 
@@ -51,12 +37,12 @@ const styles = StyleSheet.create({
     pending: {
         margin: 10,
         borderRadius: 5,
-        backgroundColor: "lightgrey"        
+        backgroundColor: "lightgrey"
     },
     rejected: {
         margin: 10,
         borderRadius: 5,
-        backgroundColor: "red"        
+        backgroundColor: "red"
     },
     name: {
         fontSize: 20,

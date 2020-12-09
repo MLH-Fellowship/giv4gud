@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "an app that connects individuals to local shelters to donate their excess items",
+    "githubUrl": "https://github.com/MLH-Fellowship/giv4gud"
   }
 }

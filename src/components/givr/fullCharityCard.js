@@ -14,8 +14,9 @@ export default function FullCharityCard(props) {
     const data = charity[charityID];
     // console.log("Check", charity, data, charityID);
     console.log("CHECK: ", charityID.id)
+    console.log("ID", id);
 
-    const [CardData, setCardData] = React.useState('');
+    const [CardData, setCardData] = React.useState(charity[0]);
 
     // async function gettingOrgs() {
     //     const organizations = await getOrgs();
@@ -24,28 +25,31 @@ export default function FullCharityCard(props) {
 
     // React.useEffect(() => {gettingOrgs() }, [])
 
-    const oneOrgRef = db.collection('organizations').doc(charityID.id);
-    const getOneOrg = async () => {
-        let org = []
-        await oneOrgRef.get().then(function (doc) {
-            if (doc.exists) {
-                org.push(doc.data())
-                console.log(doc.data())
-            } else {
-                console.log("No org found");
-            }
-        })
-        return org
-    }
+    // const oneOrgRef = db.collection('organizations').doc(charityID.id);
+    // const getOneOrg = async () => {
+    //     let org = []
+    //     await oneOrgRef.get().then(function (doc) {
+    //         if (doc.exists) {
+    //             org.push(doc.data())
+    //             console.log(doc.data())
+    //         } else {
+    //             console.log("No org found");
+    //         }
+    //     })
+    //     return org
+    // }
 
     async function gettingOrg() {
-        const organization = await getOneOrg(charityID.id);
-        setCardData(organization)
+        console.log("Hi there");
+        const organization = await db.collection('organizations').doc(charityID.id).get() // getOneOrg(charityID.id);
+        console.log("Test", organization.data())
+        console.log( "Does this run?", organization);
+        setCardData(organization.data())
     }
 
     React.useEffect(() => { gettingOrg() }, [])
 
-    console.log("apple", CardData)
+    console.log("apple", typeof(CardData))
 
     return (
         <Card>

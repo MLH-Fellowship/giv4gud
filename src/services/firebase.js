@@ -43,19 +43,8 @@ const getOrgs = async () => {
     return orgs
 }
 
-const getOneOrg = async () => {
-    let org = []
-    await orgRef.get().then(function (querySnapshot) {
-        querySnapshot(function (doc) {
-            org.push(doc.data)
-        })
-    })
-    return org
-}
-
 export {
     db,
     addDonation,
     getOrgs,
-    getOneOrg
 }

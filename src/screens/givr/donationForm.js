@@ -4,82 +4,95 @@ import { addDonation } from "../../services/firebase"
 import AuthContext from "../../../Context"
 
 // Data *delete once integrated w/ database*
-const sampleData = 
-[
-  {
-    "itemName": "Shirt",
-    "category": "Clothing",
-    "priority": "High"
-  },
-  {
-    "itemName": "Pants",
-    "category": "Clothing",
-    "priority": "Medium"
-  },
-  {
-    "itemName": "Food",
-    "category": "Canned Tomatos",
-    "priority": "Low"
-  },
-  {
-    "itemName": "Shirt",
-    "category": "Clothing",
-    "priority": "High"
-  },
-  {
-    "itemName": "Pants",
-    "category": "Clothing",
-    "priority": "Medium"
-  },
-  {
-    "itemName": "Food",
-    "category": "Canned Tomatos",
-    "priority": "Low"
-  }
-]
+
+const sampleData =
+  [
+    {
+      "itemName": "Shirt",
+      "category": "Clothing",
+      "priority": "High"
+    },
+    {
+      "itemName": "Pants",
+      "category": "Clothing",
+      "priority": "Medium"
+    },
+    {
+      "itemName": "Food",
+      "category": "Canned Tomatos",
+      "priority": "Low"
+    },
+    {
+      "itemName": "Shirt",
+      "category": "Clothing",
+      "priority": "High"
+    },
+    {
+      "itemName": "Pants",
+      "category": "Clothing",
+      "priority": "Medium"
+    },
+    {
+      "itemName": "Food",
+      "category": "Canned Tomatos",
+      "priority": "Low"
+    }
+  ]
 
 // Weird error about text can't be child of view
 
 function DonationCard(props) {
-    const data = props.data;
-    const name = data.itemName;
-    const key = props.cardID;
+  const data = props.data;
+  const name = data.itemName;
+  const key = props.cardID;
 
-    // User & Charity IDs (most likely won't need)
-    const id = props.id;
-    const charityID = props.charityID;
-    
-    const [count, setCount] = useState(0);
+  // User & Charity IDs (most likely won't need)
+  const id = props.id;
+  const charityID = props.charityID;
 
-    return(
-        <TouchableOpacity 
-          key = {key} 
-          onPress={() => 
-            {
-              setCount(count + 1);
-              props.store[name] += 1;
-            }}
-          style={styles.card}
-        > 
-          <Text> {data.itemName} </Text>
-          <Text> Quantity: {count} </Text>
-        </TouchableOpacity>
-        )
+  const [count, setCount] = useState(0);
+
+  return (
+    <View>
+      <Text> {data.itemName} </Text>
+      <Text> Quantity: {count} </Text>
+      <TouchableOpacity
+        key={key}
+        onPress={() => {
+          setCount(count + 1);
+          props.store[name] += 1;
+        }}
+        style={styles.card}
+      >
+      </TouchableOpacity>
+      <TouchableOpacity
+        key={key}
+        onPress={() => {
+          if (count > 0) {
+            setCount(count - 1);
+            props.store[name] -= 1;
+          }
+        }}
+        style={styles.card}
+      >
+      </TouchableOpacity>
+    </View>
+  )
 }
 
 // Donation Cards
-function DonationCardGallery(props){
+function DonationCardGallery(props) {
   const id = props.id;
   const charityID = props.charityID;
-  return(
+  return (
     <View style={styles.cardGallery}>
       {props.data.map((x, i) => {
-        return(
-          <DonationCard 
-              data = {x} cardID = {i} 
-              store = {props.store} 
-              key = {i} id = {id} 
-              charityID = {charityID}
+        return (
+          <DonationCard
+            data={x} cardID={i}
+            store={props.store}
+            key={i} id={id}
+            charityID={charityID}
           />
         )
       })}
@@ -91,49 +104,49 @@ function DonationCardGallery(props){
 // Reach: add description feature
 
 export default function DonationForm(props) {
-    
-    const id = props.id;
-    const charityID = props.charityID;
 
-    // User ID
-    console.log("User & Charity ID", props.id, props.charityID);
+  const id = props.id;
+  const charityID = props.charityID;
 
-    // Replace data w/ firebase call | this is data that should be 
-    // sent back to firebase
-    const data = 
-      {
-      "Shirt": 0,
-      "Pants": 0,
-      "Food": 0
-      }
-    
-    // Gerald's add donation stuff
-    let donationList = [];
+  // User ID
+  console.log("User & Charity ID", props.id, props.charityID);
 
-    const onDonationAdded = () => {
-        let data =
-        {
-            "name": name,
-            "quantity": quantity,
-            "priority": priority
-        }
+  // Replace data w/ firebase call | this is data that should be
+  // sent back to firebase
+  const data =
+  {
+    "Shirt": 0,
+    "Pants": 0,
+    "Food": 0
+  }
 
-        // Push data to firebase
-        /* Insert code here */
-        addDonation(data)
-        // Validation
-        console.log(data);
-        alert("Donation Added");
+  // Gerald's add donation stuff
+  let donationList = [];
+
+  const onDonationAdded = () => {
+    let data =
+    {
+      "name": name,
+      "quantity": quantity,
+      "priority": priority
     }
+
+    // Push data to firebase
+    /* Insert code here */
+    addDonation(data)
+    // Validation
+    console.log(data);
+    alert("Donation Added");
+  }
 
   // Stored to prepare data that will be sent back to firebase
   return (
     <View style={styles.container}>
-      <DonationCardGallery data={sampleData} store = {data} id = {id} charityID = {charityID}/> 
-      <TouchableOpacity 
-        onPress={() => console.log(data)} 
+      <DonationCardGallery data={sampleData} store={data} id={id} charityID={charityID} />
+      <TouchableOpacity
+        onPress={() => console.log(data)}
         style={styles.submitButton}
-      > 
+      >
         <Text style={styles.buttonText}> Submit Donations </Text>
       </TouchableOpacity>
     </View>
@@ -171,6 +184,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 20,
-    
+
   }
 });

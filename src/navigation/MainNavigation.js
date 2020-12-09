@@ -44,9 +44,9 @@ function MainNavigation() {
           case 'RESTORE_TOKEN':
             return {
               ...prevState,
-              userToken: action.token, // action.token,
+              userToken: "action.token", // action.token,
               isLoading: false,
-              userType: null, // null,
+              userType: "User", // null,
               userID: null,
             };
           case 'SIGN_IN':

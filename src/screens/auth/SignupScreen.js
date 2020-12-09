@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
      },
      radioButton: {
          flexDirection: "row",
-         width: 200
+         width: 200,
+         marginLeft: 30
      },
      signupText: {
         fontSize: 30,
@@ -260,12 +261,13 @@ export default function SignupScreen() {
                 value={userType}
             >
                 <View style={styles.radioButton}>
-                    <Text>Individual</Text>
-                    <RadioButton value="User" />
+                    <RadioButton value="User" />    
+                    <Text >Individual</Text>
+                    
                 </View>
                 <View style={styles.radioButton}>
-                    <Text>Organization</Text>
                     <RadioButton value="Organization" />
+                    <Text>Organization</Text>
                 </View>
             </RadioButton.Group>
             {userType == "User" ? userForm : orgForm}

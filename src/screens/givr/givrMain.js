@@ -21,9 +21,9 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 25,
         fontFamily: "serif",
-        marginLeft: 15,
+        marginLeft: 8,
         paddingTop: 10,
-        paddingBottom: 5
+        paddingBottom: 5,
     },
     container: {
         marginHorizontal: 10

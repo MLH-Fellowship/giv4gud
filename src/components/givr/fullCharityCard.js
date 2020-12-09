@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Button, Icon } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Button, Icon, Image } from 'react-native';
 import { Card } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
+import charityPic from '../../../charityPic.png';
 
 // Get data (replace w/ call to Firebase later)
 import charity from "../../../data/charity" // Dummy data of charities
@@ -14,6 +15,11 @@ export default function FullCharityCard(props){
     console.log("Check", charity, data, charityID);
     return(
         <Card>
+            <View style={styles.containImage}>
+                <Image style={styles.imageContainer}
+                    source={charityPic} 
+                />
+            </View>
             <Card.Title>{data.name}</Card.Title>
             <Card.Divider/>
             <Text style={{marginBottom: 10}}>
@@ -47,5 +53,13 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: 20,
         color: '#fff'
+    },
+    imageContainer: {
+        width: 300,
+        height: 100,
+        alignItems: 'center'
+    },
+    containImage: {
+        alignItems: 'center'
     }
   });

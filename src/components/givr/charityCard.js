@@ -18,7 +18,8 @@ export default function CharityCard(props){
     console.log("ID in Charity Card", props.id);
     
     // Need to get collections from firebase to render cards
-    
+    console.log(charity[0].highNeeds)
+
     return(
         charity.map((u, i) => { // Replace charity w/ data from firebase Note: make sure i is replaced w/ charity document name
             return (
@@ -29,8 +30,8 @@ export default function CharityCard(props){
                 >
                     <View style = {styles.cardContainer}>
                         <Text style={styles.cardName}> {u.name} </Text> 
-                        <Text style={styles.cardLocation}> Location: {u.location}</Text>
-                        <Text style={styles.cardNeed}> Needs: {u.highNeeds}</Text>
+                        <Text style={styles.cardLocation}> {u.location} </Text>
+                        <Text style={styles.cardNeed}> In need of {u.highNeeds.join(', ')} </Text>
                     </View>
                 </TouchableOpacity>
             );
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'lightblue'        
       },
     cardContainer: {
-        margin: 10,
+        marginVertical: 10,
         backgroundColor: "#C9D4C5",
         borderRadius: 10,
         padding: 10
@@ -73,14 +74,18 @@ const styles = StyleSheet.create({
     charityCard: {
     },
     cardName: {
-        fontSize: 18,
-        paddingBottom: 7,
-        paddingLeft: 5
+        fontSize: 21,
+        // paddingBottom: 7,
+        paddingLeft: 5,
+        fontFamily: 'serif',
     },
     cardLocation: {
-        padding: 5
+        paddingBottom: 5,
+        paddingLeft: 6,
+        fontSize: 12,
     },
     cardNeed: {
-        padding: 5
+        padding: 5,
+        fontSize: 15,
     }
 });

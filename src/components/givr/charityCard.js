@@ -5,50 +5,99 @@ import { Card } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 
 // Get data (replace w/ call to Firebase later)
+import { db, getOrgs } from '../../services/firebase' // allows call database
+import 'firebase/firestore'
 import charity from "../../../data/charity"
 
+// Get Firebase Data
+// Need to get collections from firebase to render cards
+// const orgRef = db.collection('organizations');
+// const getOrgs = async () => {
+//     let orgs = []
+//     await orgRef.get().then(function (querySnapshot) {
+//         querySnapshot.forEach(function (doc) {
+//             orgs.push(doc.data())
+//             console.log(doc.data())
+//         })
+//     })
+//     return orgs
+// }
+
 // Function to create Charity Cards
-export default function CharityCard(props){
-    
+export default function CharityCard(props) {
+
+    const [CardData, setCardData] = React.useState(charity);
     // Get Navigator Object
     const navigation = useNavigation();
-
+    console.log("Cards", CardData);
     // Get User ID (only used for navigation)
     const id = props.id;
-    console.log("ID in Charity Card", props.id);
-    
-    // Need to get collections from firebase to render cards
+    console.log("User ID in Charity Card", props.id);
+    console.log("test", props);
+
+    async function gettingOrgs() {
+        const organizations = await getOrgs();
+        console.log("hi");        
+        setCardData(organizations)
+    }
+
+    React.useEffect(() => {gettingOrgs() }, [])
+    console.log("Card Data", CardData)
     
     return(
-    <Card>
-        <Card.Title> Charity Card </Card.Title>
-        <Card.Divider /> 
-        {
-        charity.map((u, i) => { // Replace charity w/ data from firebase Note: make sure i is replaced w/ charity document name
-            return (
-                <TouchableOpacity key = {i} onPress = {() => navigation.navigate("Open Charity", {id: id, charityID: i})}> 
-                    <View style = {styles.cardContainer}>
-                        <Text> {u.name} </Text> 
-                        <Text> Location: {u.location}</Text>
-                        <Text> Needs: {u.highNeeds}</Text>
-                        <Text> Key: {i} </Text>
-                    </View>
-                </TouchableOpacity>
-            );
-        })
+    CardData.map((u, i) => { // Replace charity w/ data from firebase Note: make sure i is replaced w/ charity document name
+        let items;
+        if (u.items != null){
+            items = Object.keys(u.items).join(', ');
+        } else {
+            items = 'No items yet'
         }
-    </Card>
-    )
-}
+        
+        console.log(items, "Hi")
+        return (
+        <>
+            <TouchableOpacity 
+                key = {i} 
+                onPress = {() => navigation.navigate("Open Charity", {id: id, charityID: u.id})}
+                style={styles.charityCard}
+            >
+                <View style = {styles.cardContainer}>
+                    <Text style={styles.cardName}> {u.name} </Text> 
+                    <Text style={styles.cardLocation}> {u.mainAddress} </Text>
+                    <Text style={styles.cardNeed}> In need of {items} </Text>
+                </View>
+            </TouchableOpacity>
+        </>
+            )
+    }
+))}
 
 const styles = StyleSheet.create({
     container: {
         padding: 0,
-        backgroundColor: 'lightblue'        
-      },
+        backgroundColor: 'lightblue'
+    },
     cardContainer: {
-        margin: 10,
-        borderColor: "red",
-        borderWidth: 3
+        marginVertical: 10,
+        backgroundColor: "#C9D4C5",
+        borderRadius: 10,
+        padding: 10
+    },
+    charityCard: {
+    },
+    cardName: {
+        fontSize: 21,
+        // paddingBottom: 7,
+        paddingLeft: 5,
+        fontFamily: 'serif',
+    },
+    cardLocation: {
+        paddingBottom: 5,
+        paddingLeft: 6,
+        fontSize: 12,
+    },
+    cardNeed: {
+        padding: 5,
+        fontSize: 15,
     }
 });

@@ -12,8 +12,17 @@ export default function CharityScreen(props) {
     return(
         <View>
             <FullCharityCard id = {id} charityID = {charityID}/>
+            <Text style={styles.donationText}> Add donations by tapping the buttons </Text>
             <DonationForm id = {id} charityID = {charityID}/>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    donationText: {
+        fontSize: 20,
+        marginLeft: 20,
+        marginTop: 20
+    }
+})
 

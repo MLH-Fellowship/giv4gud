@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+// import { db } from '../services/firebase.js'
+import firebase from 'firebase'
 
 // // Auth
 import SignupScreen from '../screens/auth/SignupScreen';
@@ -33,6 +35,7 @@ function SplashScreen() {
 const Stack = createStackNavigator();
 
 function MainNavigation() {
+
   // Auth Code
   const [state, dispatch] = React.useReducer
     (
@@ -82,6 +85,8 @@ function MainNavigation() {
     );
 
   React.useEffect(() => {
+
+
     // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
       let userToken;
@@ -105,22 +110,15 @@ function MainNavigation() {
   const authContext = React.useMemo(
     () => ({
       signIn: async data => {
+        const { id, email, password, userType } = data.data;
+        console.log("Signup Data: ID - ", id, "email", email, "password", password, "userType", userType);
 
-        console.log("Data", data);
-
-        /* Check if user exists using firebase 
-           Return user key / id if exists
-           Else dispatch restoreToken */
-
-        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', userType: 'Organization', userID: 'Bobby' }); // Put user id from firebase in userID & replace userType w/ data.user
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', userType: userType, userID: id });
       },
       signOut: () => dispatch({ type: 'SIGN_OUT' }),
       signUp: async data => {
         console.log("Signup Data", data);
         console.log("ID", data.uid);
-        /* Add user to database
-        Return user key / id 
-        For SIGN_IN Dispatch, move screen to additional form screen */
 
         dispatch({ type: 'SIGN_UP', token: 'dummy-auth-token', userType: data.userType, userID: data.uid }); // Get UID
       },
@@ -130,7 +128,21 @@ function MainNavigation() {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#69A579',
+              borderBottomLeftRadius: 8,
+              borderBottomRightRadius: 8,
+              height: 95,     
+            }, 
+              headerTitleStyle: {
+                fontWeight: 100,
+                fontSize: 40,   
+                fontWeight: 'serif'
+            },
+
+          }}>
 
           {state.isLoading ? (
             // We haven't finished checking for the token yet
@@ -138,26 +150,25 @@ function MainNavigation() {
           ) : state.userToken == null ? (
             // No token found, user isn't signed in
             <>
-              <Stack.Screen
-                name="SignIn"
-                component={SignupScreen}
-                options={{
-                  title: 'Sign in',
-                  // When logging out, a pop animation feels intuitive
-                  animationTypeForReplace: state.isSignout ? 'pop' : 'push',
-                }}
-              />
 
               <Stack.Screen
                 name="Login"
                 component={LoginScreen}
                 options={{
-                  title: 'Login',
+                  title: 'Giv4Gud',
+                  // When logging out, a pop animation feels intuitive
+                  animationTypeForReplace: state.isSignout ? 'pop' : 'push',                  
+                }}
+              />
+              <Stack.Screen
+                name="SignIn"
+                component={SignupScreen}
+                options={{
+                  title: 'Giv4Gud',
                   // When logging out, a pop animation feels intuitive
                   animationTypeForReplace: state.isSignout ? 'pop' : 'push',
                 }}
               />
-
             </>
 
           ) : state.userType == 'User' && state.userToken != null ? (
@@ -167,19 +178,29 @@ function MainNavigation() {
               <Stack.Screen
                 name="Givr Main"
                 component={GivrNavigation}
-                initialParams={{id: state.userID}}
+                initialParams={{ id: state.userID }}
+                options={
+                  {
+                  title: "Giv4Gud"
+                  }
+                }
               />
 
               <Stack.Screen
                 name="Open Charity"
                 component={CharityScreen}
-                initialParams={{id: state.userID}}
+                initialParams={{ id: state.userID }}
+                options={
+                  {
+                  title: "Add Donation"
+                  }
+                }
               />
 
               <Stack.Screen
                 name="Donation Form"
                 component={DonationForm}
-                initialParams={{id: state.userID}}
+                initialParams={{ id: state.userID }}
               />
 
             </>
@@ -188,7 +209,7 @@ function MainNavigation() {
                     <Stack.Screen
                       name="Goodr Main"
                       component={CharityNavigation}
-                      initialParams={{id: state.userID}}
+                      initialParams={{ id: state.userID }}
                     />
                   </>
 

@@ -1,9 +1,26 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { addDonation } from "../../services/firebase"
+import AuthContext from "../../../Context"
 
 // Data *delete once integrated w/ database*
 const sampleData = 
 [
+  {
+    "itemName": "Shirt",
+    "category": "Clothing",
+    "priority": "High"
+  },
+  {
+    "itemName": "Pants",
+    "category": "Clothing",
+    "priority": "Medium"
+  },
+  {
+    "itemName": "Food",
+    "category": "Canned Tomatos",
+    "priority": "Low"
+  },
   {
     "itemName": "Shirt",
     "category": "Clothing",
@@ -35,14 +52,17 @@ function DonationCard(props) {
     const [count, setCount] = useState(0);
 
     return(
-        <TouchableOpacity key = {key} onPress={() => {
-            setCount(count + 1);
-            props.store[name] += 1;
-          }
-        }> 
-          <Text> Item: {data.itemName} </Text>
-          <Text> Priority: {data.priority} </Text>
-          <Text> Quantity: {count}</Text>
+        <TouchableOpacity 
+          key = {key} 
+          onPress={() => 
+            {
+              setCount(count + 1);
+              props.store[name] += 1;
+            }}
+          style={styles.card}
+        > 
+          <Text> {data.itemName} </Text>
+          <Text> Quantity: {count} </Text>
         </TouchableOpacity>
         )
 }
@@ -52,10 +72,15 @@ function DonationCardGallery(props){
   const id = props.id;
   const charityID = props.charityID;
   return(
-    <View>
+    <View style={styles.cardGallery}>
       {props.data.map((x, i) => {
         return(
-          <DonationCard data = {x} cardID = {i} store = {props.store} key = {i} id = {id} charityID = {charityID}/>
+          <DonationCard 
+              data = {x} cardID = {i} 
+              store = {props.store} 
+              key = {i} id = {id} 
+              charityID = {charityID}
+          />
         )
       })}
     </View>
@@ -81,27 +106,71 @@ export default function DonationForm(props) {
       "Pants": 0,
       "Food": 0
       }
+    
+    // Gerald's add donation stuff
+    let donationList = [];
+
+    const onDonationAdded = () => {
+        let data =
+        {
+            "name": name,
+            "quantity": quantity,
+            "priority": priority
+        }
+
+        // Push data to firebase
+        /* Insert code here */
+        addDonation(data)
+        // Validation
+        console.log(data);
+        alert("Donation Added");
+    }
 
   // Stored to prepare data that will be sent back to firebase
   return (
-    <View>
-      <DonationCardGallery data={sampleData} store = {data} id = {id} charityID = {charityID}/> {/* Repalce sampleData w/ firebase data */}
-      <TouchableOpacity onPress={() => console.log(data)} > {/* Replace w/ call to add data to database*/}
-          <Text> Push this to return </Text>
+    <View style={styles.container}>
+      <DonationCardGallery data={sampleData} store = {data} id = {id} charityID = {charityID}/> 
+      <TouchableOpacity 
+        onPress={() => console.log(data)} 
+        style={styles.submitButton}
+      > 
+        <Text style={styles.buttonText}> Submit Donations </Text>
       </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center'
+  },
   cardGallery: {
-    flex: 1,
-    backgroundColor: 'lightblue',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 1000,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center'
   },
   card: {
-    height: 200
+    margin: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: 'grey',
+    borderWidth: 2,
+    padding: 20,
+    borderRadius: 15,
+    backgroundColor: '#B67FDD',
+  },
+  submitButton: {
+    backgroundColor: 'lightblue',
+    padding: 10,
+    borderRadius: 10,
+    paddingHorizontal: 30,
+    height: 60,
+    width: 300,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  buttonText: {
+    fontSize: 20,
+    
   }
 });

@@ -20,8 +20,15 @@ export default function GivrNavigation(props) {
   // console.log("Hellow", navigation);
   return (
     <Tab.Navigator initialRouteName='Home'>
-      <Tab.Screen name="Home" component={GivrMain} initialParams={{ id: id }} />
-      <Tab.Screen name="Donation Status" component={StatusScreen} initialParams={{ id: id }} />
+      <Tab.Screen name="Home" 
+          component={GivrMain} 
+          initialParams={{ id: id }}
+      />
+
+      <Tab.Screen name="Donation Status" 
+          component={StatusScreen} 
+          initialParams={{ id: id }}
+      />
       <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
   );

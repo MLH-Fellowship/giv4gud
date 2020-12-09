@@ -57,11 +57,7 @@ export default function FullCharityCard(props) {
     } else {
         items = 'no items yet'
     }
-
-    console.log("Check again: ", items)
-
-    // console.log("apple", CardData.items);
-    // let items = Object.keys(CardData.items).join(', ');
+  
     return (
         <Card>
             <View style={styles.containImage}>

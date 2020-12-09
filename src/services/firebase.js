@@ -33,5 +33,4 @@ const addDonation = (data) => {
 export {
     db,
     addDonation,
-    getUserType,
 }

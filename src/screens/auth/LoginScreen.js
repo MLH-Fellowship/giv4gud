@@ -12,6 +12,32 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    input: {
+        margin: 15,
+        height: 40,
+        width: 200,
+        borderBottomColor: '#C0C0C0',
+        borderBottomWidth: 1,
+        paddingLeft: 10,
+        borderRadius: 4
+        
+     },
+     submitButton: {
+        backgroundColor: '#B67FDD',
+        padding: 10,
+        paddingHorizontal: 50,
+        alignItems: 'center',
+        borderRadius: 10
+     },
+     submitButtonText:{
+        color: 'white'
+     },
+     other: {
+        marginTop: 20
+     },
+     loginText: {
+         fontSize: 30
+     }
 });
 
 function LoginScreen() {
@@ -42,7 +68,7 @@ function LoginScreen() {
                             onLoginOrgPress()
                             return;
                         }
-                        alert('user');
+                        // alert('user');
                         // Call signIn function
                         console.log("Data in LoginScreen", data)
                         signIn({ data });
@@ -71,7 +97,7 @@ function LoginScreen() {
                             alert("Email does not exist anymore.")
                             return;
                         }
-                        alert('organization');
+                        // alert('organization');
                         const data = {
                             id: uid,
                             email,
@@ -93,9 +119,10 @@ function LoginScreen() {
 
     return (
         <View style={styles.container}>
-
+            <Text style={styles.loginText}> Login </Text>
             <TextInput
                 placeholder='E-mail'
+                style={styles.input}
                 placeholderTextColor="#aaaaaa"
                 onChangeText={(text) => setEmail(text)}
                 value={email}
@@ -104,6 +131,7 @@ function LoginScreen() {
             />
             <TextInput
                 placeholderTextColor="#aaaaaa"
+                style={styles.input}
                 secureTextEntry
                 placeholder='Password'
                 onChangeText={(text) => setPassword(text)}
@@ -112,15 +140,17 @@ function LoginScreen() {
                 autoCapitalize="none"
             />
             <TouchableOpacity
+                style={styles.submitButton}
                 onPress={() => onLoginPress()}>
                 <Text>Log in</Text>
             </TouchableOpacity>
-
-            <Text
-                onPress={() => navigation.navigate('SignIn')}
-            > Don't have an account? Sign up.
-
-            </Text>
+            
+            <View style = {styles.other}>
+                <Text
+                    onPress={() => navigation.navigate('SignIn')}
+                > Don't have an account? Sign up.
+                </Text>
+            </View>
 
         </View>
     )

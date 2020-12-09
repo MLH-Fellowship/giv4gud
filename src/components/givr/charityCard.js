@@ -20,24 +20,42 @@ export default function CharityCard(props){
     // Need to get collections from firebase to render cards
     
     return(
-    <Card>
-        <Card.Title> Charity Card </Card.Title>
-        <Card.Divider /> 
-        {
         charity.map((u, i) => { // Replace charity w/ data from firebase Note: make sure i is replaced w/ charity document name
             return (
-                <TouchableOpacity key = {i} onPress = {() => navigation.navigate("Open Charity", {id: id, charityID: i})}> 
+                <TouchableOpacity 
+                    key = {i} 
+                    onPress = {() => navigation.navigate("Open Charity", {id: id, charityID: i})}
+                    style={styles.charityCard}
+                >
                     <View style = {styles.cardContainer}>
-                        <Text> {u.name} </Text> 
-                        <Text> Location: {u.location}</Text>
-                        <Text> Needs: {u.highNeeds}</Text>
-                        <Text> Key: {i} </Text>
+                        <Text style={styles.cardName}> {u.name} </Text> 
+                        <Text style={styles.cardLocation}> Location: {u.location}</Text>
+                        <Text style={styles.cardNeed}> Needs: {u.highNeeds}</Text>
                     </View>
                 </TouchableOpacity>
             );
         })
-        }
-    </Card>
+    // <Card>
+    //     <Card.Title style={{textAlign: 'left', fontSize: 25, marginLeft: 10}}> Charities in Need </Card.Title>
+    //     <Card.Divider /> 
+    //     {
+    //     charity.map((u, i) => { // Replace charity w/ data from firebase Note: make sure i is replaced w/ charity document name
+    //         return (
+    //             <TouchableOpacity 
+    //                 key = {i} 
+    //                 onPress = {() => navigation.navigate("Open Charity", {id: id, charityID: i})}
+    //                 style={styles.charityCard}
+    //             >
+    //                 <View style = {styles.cardContainer}>
+    //                     <Text style={styles.cardName}> {u.name} </Text> 
+    //                     <Text style={styles.cardLocation}> Location: {u.location}</Text>
+    //                     <Text style={styles.cardNeed}> Needs: {u.highNeeds}</Text>
+    //                 </View>
+    //             </TouchableOpacity>
+    //         );
+    //     })
+    //     }
+    // </Card>
     )
 }
 
@@ -48,7 +66,21 @@ const styles = StyleSheet.create({
       },
     cardContainer: {
         margin: 10,
-        borderColor: "red",
-        borderWidth: 3
+        backgroundColor: "#C9D4C5",
+        borderRadius: 10,
+        padding: 10
+    },
+    charityCard: {
+    },
+    cardName: {
+        fontSize: 18,
+        paddingBottom: 7,
+        paddingLeft: 5
+    },
+    cardLocation: {
+        padding: 5
+    },
+    cardNeed: {
+        padding: 5
     }
 });

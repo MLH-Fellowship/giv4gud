@@ -17,35 +17,17 @@ if (!firebase.apps.length) {
 }
 
 const db = firebase.firestore();
-
-// console log userType
-const getUserType = () => {
-    var docRef = db.collection("users").doc(user.uid);
-    docRef.get().then(function (doc) {
-        if (doc.exists) {
-            // replace .userType with any key to return value
-            console.log("Document Data: ", doc.data().userType);
-        } else {
-            console.log("No such document!");
-        }
-    }).catch(function (error) {
-        console.log("Error getting document: ", error);
-    })
-}
+// const user = firebase.auth().currentUser;
+// const userUID = user.uid
 
 const addDonation = (data) => {
-    firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-            console.log('User Email: ', user.email, 'UID:', user.uid, "UserType: ");
-
-            db.collection("users").doc(user.uid).update({
-                "items": { data }
-            })
-                .then(function () {
-                    console.log({ data })
-                })
-        }
-    });
+    db.collection("users").doc("rZwFQ4GlYha2W2PE9khvJrIJF223").update({
+        "items": { data }
+    })
+        .then(function () {
+            // console.log("Document successfully updated!");
+            console.log('currentUser')
+        })
 }
 
 export {

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import * as firebase from 'firebase';
-import { db } from '../services/firebase'
+// import { db } from '../services/firebase.js'
+import firebase from 'firebase'
 
 // // Auth
 import SignupScreen from '../screens/auth/SignupScreen';
@@ -35,6 +35,7 @@ function SplashScreen() {
 const Stack = createStackNavigator();
 
 function MainNavigation() {
+
   // Auth Code
   const [state, dispatch] = React.useReducer
     (
@@ -84,6 +85,8 @@ function MainNavigation() {
     );
 
   React.useEffect(() => {
+
+
     // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
       let userToken;
@@ -133,6 +136,7 @@ function MainNavigation() {
           ) : state.userToken == null ? (
             // No token found, user isn't signed in
             <>
+
               <Stack.Screen
                 name="Login"
                 component={LoginScreen}

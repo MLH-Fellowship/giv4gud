@@ -107,10 +107,10 @@ function MainNavigation() {
   const authContext = React.useMemo(
     () => ({
       signIn: async data => {
-        const {id, email, password, userType } = data.data;
+        const { id, email, password, userType } = data.data;
         console.log("Signup Data: ID - ", id, "email", email, "password", password, "userType", userType);
 
-        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', userType: userType, userID: id }); 
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', userType: userType, userID: id });
       },
       signOut: () => dispatch({ type: 'SIGN_OUT' }),
       signUp: async data => {

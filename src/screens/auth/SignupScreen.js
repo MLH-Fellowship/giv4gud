@@ -118,6 +118,7 @@ export default function SignupScreen() {
                     userType,
                     mainAddress,
                     mailingAddress,
+                    items: {},
                 };
                 const usersRef = firebase.firestore().collection('organizations')
                 usersRef

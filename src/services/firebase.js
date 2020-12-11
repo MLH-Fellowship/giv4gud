@@ -28,7 +28,7 @@ const addDonation = async (data, charityID) => {
     let docRead = await docRef.get();
     let docStuff = docRead.data();
     console.log(docStuff);
-    docStuff.items[data.item] = data.quantity;
+    docStuff.items[data.name] = 3 // data.quantity;
     docRef.update(docStuff);
 }
 
